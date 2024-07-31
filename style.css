@@ -6,28 +6,38 @@ body {
     color: #333;
 }
 
-header {
-    background: #f4f4f4;
-    padding: 1rem;
-    text-align: center;
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
 }
 
-nav ul {
-    padding: 0;
+.name {
+    font-weight: bold;
+    font-size: 1.2em;
 }
 
-nav ul li {
-    display: inline;
-    margin-right: 10px;
-}
-
-nav ul li a {
+.social-icons a {
+    margin-left: 15px;
     text-decoration: none;
-    color: #333;
+}
+
+.social-icons img {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
 }
 
 main {
-    padding: 2rem;
+    padding: 80px 2rem 2rem; /* Added top padding to account for fixed top bar */
     max-width: 800px;
     margin: 0 auto;
 }
