@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark-mode">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +15,7 @@
             <a href="#" title="Email"><img src="images/icon-email.png" alt="Email"></a>
             <a href="#" title="Google Scholar"><img src="images/icon-google-scholar.png" alt="Google Scholar"></a>
             <a href="#" title="GitHub"><img src="images/icon-github.png" alt="GitHub"></a>
-            <a href="#" title="Dark Mode Toggle"><img src="images/icon-dark-mode.png" alt="Dark Mode Toggle"></a>
+            <button id="dark-mode-toggle" title="Toggle Dark Mode"><img src="images/icon-dark-mode.png" alt="Dark Mode Toggle"></button>
         </div>
     </nav>
 
@@ -80,5 +80,11 @@
     <footer>
         <p>&copy; 2023 Sam Dunning. All rights reserved.</p>
     </footer>
+
+    <script>
+        document.getElementById('dark-mode-toggle').addEventListener('click', function() {
+            document.documentElement.classList.toggle('dark-mode');
+        });
+    </script>
 </body>
 </html>
