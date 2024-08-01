@@ -1,18 +1,141 @@
+:root {
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --nav-bg-color: #f8f8f8;
+    --border-color: #dddddd;
+    --link-color: #0066cc;
+    --icon-color: #333333;
+    --section-light: #ffffff;
+    --section-dark: #f0f0f0;
+}
+
+.dark-mode {
+    --bg-color: #1a1a1a;
+    --text-color: #ffffff;
+    --nav-bg-color: #252525;
+    --border-color: #333333;
+    --link-color: #7F9CF5;
+    --icon-color: #ffffff;
+    --section-light: #252525;
+    --section-dark: #1a1a1a;
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: cursive;
     line-height: 1.6;
     margin: 0;
     padding: 0;
     background-color: var(--bg-color);
     color: var(--text-color);
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.centered-content {
+/* Navigation styles */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--nav-bg-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+}
+
+.name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+
+.text-link {
+    margin-right: 1rem;
+    text-decoration: none;
+    font-weight: 500;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+.social-icons {
+    display: flex;
+    align-items: center;
+}
+
+.icon-link {
+    margin-left: 0.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    fill: var(--icon-color);
+    transition: fill 0.3s ease;
+}
+
+#dark-mode-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+#dark-mode-toggle:focus {
+    outline: none;
+}
+
+/* Main content styles */
+main {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.section-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Full-height sections */
+#blog, #projects {
+    min-height: calc(100vh - 60px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#blog .section-content, #projects .section-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+h2 {
+    color: var(--text-color);
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+/* Intro section styles */
+.intro-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
     max-width: 800px;
     margin: 0 auto;
-    padding: 2rem;
 }
 
 .profile-pic {
@@ -20,21 +143,179 @@ body {
     height: 200px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 1rem;
+    margin-bottom: -1.5rem;
 }
 
-.social-icons {
-    margin-top: 1rem;
+.intro-content h1 {
+    margin-bottom: -1rem;
+    font-size: 2.5rem;
 }
 
-.social-icons a {
-    margin: 0 10px;
+.subtitle {
+    font-size: 1.2rem;
+    margin-bottom: -0.5rem;
+    color: #7F9CF5;
 }
 
-.section-title {
+.affiliation, .email {
+    margin-bottom: -0.5rem;
+}
+
+.social-links {
+    margin: 1rem 0;
+}
+
+.social-links a {
+    margin: 0 0.5rem;
+    color: var(--link-color);
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+
+.bio {
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* You'll need to add appropriate icon styles or use an icon font for the social icons */
+.icon-email, .icon-scholar, .icon-github {
+    /* Add styles for your icons here */
+
+}
+
+
+.blog-post {
+    background-color: var(--section-light);
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.blog-post h3 {
+    margin-top: 0;
+}
+
+.post-meta {
+    font-style: italic;
+    color: var(--text-color);
+    opacity: 0.7;
+}
+
+.read-more {
+    display: inline-block;
+    margin-top: 0.5rem;
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+/* Project styles */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.project {
+    background-color: var(--section-light);
+    padding: 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.github-link {
+    display: inline-block;
+    margin-top: 0.5rem;
+    text-decoration: none;
+    color: var(--link-color);
+}
+
+/* Experience styles */
+.experience-item {
+    margin-bottom: 2rem;
+}
+
+.date {
+    font-style: italic;
+    color: var(--text-color);
+    opacity: 0.7;
+}
+
+/* Footer styles */
+footer {
     text-align: center;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: var(--nav-bg-color);
+    transition: background-color 0.3s ease;
 }
 
-/* Add more styling as needed for other elements */
+/* Section background colors */
+.section-light {
+    background-color: var(--section-light);
+    padding: 2rem 0;
+    transition: background-color 0.3s ease;
+}
+
+.section-dark {
+    background-color: var(--section-dark);
+    padding: 2rem 0;
+    transition: background-color 0.3s ease;
+}
+
+/* Dark mode specific adjustments */
+.dark-mode .project,
+.dark-mode .blog-post {
+    background-color: #252525;
+}
+
+.dark-mode .date,
+.dark-mode .post-meta {
+    color: #cccccc;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-links {
+        margin-top: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .text-link {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+    }
+
+    .social-icons {
+        margin-top: 1rem;
+    }
+
+    .intro-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-content {
+        padding: 1rem;
+    }
+
+    #blog, #projects {
+        min-height: calc(100vh - 120px);
+    }
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 60px;
+}
