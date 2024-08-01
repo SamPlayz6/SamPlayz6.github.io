@@ -7,34 +7,26 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="top-bar">
-        <div class="name">Sam Dunning</div>
+    <header class="centered-content">
+        <img src="images/profile-pic.jpg" alt="Sam Dunning" class="profile-pic">
+        <h1>Sam Dunning</h1>
+        <p class="title">Your Title Here</p>
+        <p class="affiliation">Your Affiliation or Company</p>
+        <p class="email">your.email@example.com</p>
         <div class="social-icons">
-            <a href="#publications" title="Publications"><img src="images/icon-publications.png" alt="Publications"></a>
-            <a href="#" title="Mentorship"><img src="images/icon-mentorship.png" alt="Mentorship"></a>
             <a href="#" title="Email"><img src="images/icon-email.png" alt="Email"></a>
             <a href="#" title="Google Scholar"><img src="images/icon-google-scholar.png" alt="Google Scholar"></a>
             <a href="#" title="GitHub"><img src="images/icon-github.png" alt="GitHub"></a>
-            <button id="dark-mode-toggle" title="Toggle Dark Mode">🌙</button>
         </div>
-    </nav>
+    </header>
 
     <main>
-        <section id="intro">
-            <h2>Introduction</h2>
-            <div class="intro-content">
-                <img src="images/profile-pic.jpg" alt="Sam Dunning" class="profile-pic">
-                <p>Hello! I'm Sam Dunning. I'm a [Your Current Role/Title] passionate about [Your Interests/Specialties]. [Brief introduction about yourself and what you do.]</p>
-            </div>
-        </section>
-
-        <section id="background">
-            <h2>Background</h2>
-            <p>[Your educational background, key achievements, or any other relevant information about your journey so far.]</p>
+        <section id="intro" class="centered-content">
+            <p>I am a [Your Role] at [Your Company/Institution]. Currently, I am focused on [Your Current Focus or Research Area]. [Add a brief description of your work and interests].</p>
         </section>
 
         <section id="publications">
-            <h2>Publications</h2>
+            <h2 class="section-title">Publications</h2>
             <ul class="publication-list">
                 <li>
                     <h3>Publication Title 1</h3>
@@ -48,32 +40,11 @@
                     <p>Journal/Conference: [Journal/Conference Name], [Year]</p>
                     <a href="#" class="publication-link">Read More</a>
                 </li>
-                <!-- Add more publications as needed -->
             </ul>
         </section>
 
-        <section id="blog">
-            <h2>Blog</h2>
-            <div class="blog-posts">
-                <article class="blog-post">
-                    <h3><a href="#">Blog Post Title 1</a></h3>
-                    <p class="post-meta">Posted on [Date] | Category: [Category]</p>
-                    <p class="post-excerpt">This is a brief excerpt from the first blog post. It gives readers a quick idea of what the post is about...</p>
-                    <a href="#" class="read-more">Read More</a>
-                </article>
-                <article class="blog-post">
-                    <h3><a href="#">Blog Post Title 2</a></h3>
-                    <p class="post-meta">Posted on [Date] | Category: [Category]</p>
-                    <p class="post-excerpt">This is a brief excerpt from the second blog post. It entices readers to click and read the full article...</p>
-                    <a href="#" class="read-more">Read More</a>
-                </article>
-                <!-- Add more blog posts as needed -->
-            </div>
-            <a href="#" class="view-all-posts">View All Posts</a>
-        </section>
-
         <section id="projects">
-            <h2>GitHub Projects</h2>
+            <h2 class="section-title">Projects</h2>
             <div class="project-grid">
                 <div class="project">
                     <h3>Project 1</h3>
@@ -94,7 +65,7 @@
         </section>
 
         <section id="experience">
-            <h2>Experience</h2>
+            <h2 class="section-title">Experience</h2>
             <div class="experience-item">
                 <h3>[Job Title] at [Company Name]</h3>
                 <p class="date">[Start Date] - [End Date or Present]</p>
@@ -121,9 +92,7 @@
     </footer>
 
     <script>
-        document.getElementById('dark-mode-toggle').addEventListener('click', function() {
-            document.documentElement.classList.toggle('dark-mode');
-        });
+        // You can add any JavaScript here if needed
     </script>
 </body>
 </html>
