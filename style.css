@@ -1,3 +1,6 @@
+/* Import the Handlee font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Handlee&display=swap');
+
 :root {
     --bg-color: #ffffff;
     --bg-color-rgb: 255, 255, 255;
@@ -8,6 +11,7 @@
     --icon-color: #333333;
     --section-light: #ffffff;
     --section-dark: #f0f0f0;
+    --main-font: 'Kalam', cursive, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
 }
 
 .dark-mode {
@@ -23,22 +27,15 @@
 }
 
 body {
-    font-family: cursive;
+    font-family: 'Kalam', cursive, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
     line-height: 1.6;
     margin: 0;
     padding: 0;
     background-color: var(--bg-color);
     color: var(--text-color);
     transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.email a {
-    color: inherit;
-    text-decoration: none;
-}
-
-.email a:hover {
-    text-decoration: underline;
 }
 
 /* Navigation styles */
@@ -121,11 +118,11 @@ section {
 }
 
 .section-content {
-    background-color: rgba(var(--bg-color-rgb), 0.8);
-    border-radius: 10px;
-    padding: 2rem;
+    background-color: transparent;
+    padding: 2rem 0;
     margin: 2rem auto;
     max-width: 1200px;
+    /* text-shadow: 1px 1px 3px rgba(0,0,0,0.3); */
 }
 
 /* Full-height sections */
@@ -144,7 +141,7 @@ section {
 }
 
 #projects {
-    padding-top: 60px; /* Adjust this value as needed */
+    padding-top: 60px;
 }
 
 #projects .section-content {
@@ -205,6 +202,16 @@ h2 {
     line-height: 1.6;
     max-width: 600px;
     margin: 0 auto;
+}
+
+/* Email link style */
+.email a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.email a:hover {
+    text-decoration: underline;
 }
 
 /* Blog post styles */
@@ -282,7 +289,7 @@ footer {
 
 .section-dark {
     background-color: var(--section-dark);
-    padding: 2rem 0;
+    padding: 0 0 2rem 0;
     transition: background-color 0.3s ease;
 }
 
@@ -342,4 +349,13 @@ footer {
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 60px;
+}
+
+/* Ensure proper loading of web fonts */
+@font-face {
+    font-family: 'Handlee';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/handlee/v12/-F6xfjBsISg9aMakDmr6oilJ3w.woff2) format('woff2');
 }
