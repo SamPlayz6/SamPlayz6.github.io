@@ -51,6 +51,19 @@ body {
     transition: background-color 0.3s ease;
 }
 
+.name-container {
+    display: flex;
+    align-items: center;
+}
+
+.profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
 .name {
     font-size: 1.5rem;
     font-weight: bold;
