@@ -1,50 +1,98 @@
 [
   {
     "id": "tl-001",
-    "date": "2025-01-19",
+    "date": "2026-01-20",
     "category": "work",
-    "title": "Life Dashboard project started",
-    "content": "Beginning work on the personal life tracking system - a visual story of my 20s",
+    "title": "Life Dashboard complete!",
+    "content": "Built the personal website backend that reads Obsidian notes and visualizes life across four quadrants",
     "significance": "major"
   },
   {
     "id": "tl-002",
-    "date": "2025-01-18",
-    "category": "relationships",
-    "title": "Deep conversation with Sarah",
-    "content": "Had a meaningful talk about future plans and life direction. Reminded me what matters.",
+    "date": "2026-01-20",
+    "category": "work",
+    "title": "Talk with Sam O'Neill",
+    "content": "Learned about long-term platform strategy - get users on free, build dependence, then monetize. Data moats matter.",
     "significance": "notable"
   },
   {
     "id": "tl-003",
-    "date": "2025-01-17",
-    "category": "parkour",
-    "title": "Landed kong precision!",
-    "content": "Finally nailed the kong precision after weeks of practice. The consistency is paying off.",
-    "significance": "major"
+    "date": "2026-01-20",
+    "category": "work",
+    "title": "Marketing strategy from Tom Connolly",
+    "content": "Need to plan events, contacts, sales pitch. How will I practically get my first 10 paying customers?",
+    "significance": "notable"
   },
   {
     "id": "tl-004",
-    "date": "2025-01-15",
-    "category": "parkour",
-    "title": "Good training session",
-    "content": "Solid flow state during evening training. Working on double kong progression.",
-    "significance": "minor"
+    "date": "2026-01-19",
+    "category": "work",
+    "title": "IGNITE Week 2 begins",
+    "content": "Goals: Company registration, Dashboard 20%, Expand school contacts. Pilot with Jayden Saturday.",
+    "significance": "notable"
   },
   {
     "id": "tl-005",
-    "date": "2025-01-12",
-    "category": "work",
-    "title": "IGNITE progress",
-    "content": "Made good headway on the startup project. Customer discovery going well.",
+    "date": "2026-01-19",
+    "category": "relationships",
+    "title": "Lunch with Marco",
+    "content": "Key insight: Design pilots to show measurable improvement in grades. This is the goal of a pilot.",
     "significance": "notable"
   },
   {
     "id": "tl-006",
-    "date": "2024-12-20",
+    "date": "2026-01-19",
+    "category": "parkour",
+    "title": "Training goals set",
+    "content": "When there's no Claude, go live! 5 different Kong vaults, 15 picnic table Kongs, Front handsprings, Helicopteros",
+    "significance": "minor"
+  },
+  {
+    "id": "tl-007",
+    "date": "2025-09-25",
+    "category": "work",
+    "title": "IGNITE begins!",
+    "content": "Week before starting UCC's IGNITE incubator. Prepared connections, proof of concept, plan of attack.",
+    "significance": "major"
+  },
+  {
+    "id": "tl-008",
+    "date": "2025-06-15",
     "category": "travel",
-    "title": "Christmas trip home",
-    "content": "Visited family for the holidays. Good to reconnect.",
+    "title": "MEXT result - didn't get it",
+    "content": "Not going to Japan this route. But gained clarity. Working Holiday Visa still an option. Control is back with me.",
+    "significance": "major"
+  },
+  {
+    "id": "tl-009",
+    "date": "2025-06-15",
+    "category": "travel",
+    "title": "Reframing the future",
+    "content": "I want to move, live, see something new. 20s are for exploration. Japan dream deferred, not abandoned.",
+    "significance": "notable"
+  },
+  {
+    "id": "tl-010",
+    "date": "2024-08-02",
+    "category": "work",
+    "title": "Tyndall research winding down",
+    "content": "Working on AlN simulations, FLARE ML potentials. Preparing for next chapter.",
+    "significance": "minor"
+  },
+  {
+    "id": "tl-011",
+    "date": "2024-07-22",
+    "category": "travel",
+    "title": "MEXT Interview prep",
+    "content": "Prepared self-introduction in Japanese. Primary motivation: work under Professor Ishii or Hayashibe.",
+    "significance": "notable"
+  },
+  {
+    "id": "tl-012",
+    "date": "2024-06-05",
+    "category": "travel",
+    "title": "Summer movement focus",
+    "content": "Want to go deep into moving this decade. 20-30 is the time for mobility, strength, and beauty in movement.",
     "significance": "notable"
   }
 ]

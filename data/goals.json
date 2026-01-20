@@ -2,65 +2,127 @@
   "nearFuture": [
     {
       "id": "goal-001",
-      "text": "Complete Life Dashboard MVP",
-      "category": "work",
-      "completed": false,
-      "progress": 25,
-      "createdAt": "2025-01-19"
-    },
-    {
-      "id": "goal-002",
-      "text": "Land double kong consistently",
-      "category": "parkour",
-      "completed": false,
-      "progress": 40,
-      "createdAt": "2025-01-10"
-    },
-    {
-      "id": "goal-003",
-      "text": "Book a trip somewhere new",
-      "category": "travel",
-      "completed": false,
-      "progress": 0,
-      "createdAt": "2025-01-01"
-    },
-    {
-      "id": "goal-004",
-      "text": "Launch IGNITE MVP",
+      "text": "Company registration submitted to CRO",
       "category": "work",
       "completed": false,
       "progress": 60,
-      "createdAt": "2024-11-01"
+      "createdAt": "2026-01-19",
+      "deadline": "2026-01-25"
+    },
+    {
+      "id": "goal-002",
+      "text": "Product ready for Jayden pilot (Saturday)",
+      "category": "work",
+      "completed": false,
+      "progress": 70,
+      "createdAt": "2026-01-19",
+      "deadline": "2026-01-25"
+    },
+    {
+      "id": "goal-003",
+      "text": "Teacher dashboard development - 20% target",
+      "category": "work",
+      "completed": false,
+      "progress": 15,
+      "createdAt": "2026-01-19"
+    },
+    {
+      "id": "goal-004",
+      "text": "Sales & Marketing timeline planned",
+      "category": "work",
+      "completed": false,
+      "progress": 0,
+      "createdAt": "2026-01-20"
+    },
+    {
+      "id": "goal-005",
+      "text": "5 different Kong vaults",
+      "category": "parkour",
+      "completed": false,
+      "progress": 0,
+      "createdAt": "2026-01-19"
+    },
+    {
+      "id": "goal-006",
+      "text": "5 Front Handsprings on grass",
+      "category": "parkour",
+      "completed": false,
+      "progress": 0,
+      "createdAt": "2026-01-19"
+    },
+    {
+      "id": "goal-007",
+      "text": "Reach out to old contacts - share tool, thank them",
+      "category": "relationships",
+      "completed": false,
+      "progress": 0,
+      "createdAt": "2026-01-19"
     }
   ],
   "farFuture": [
     {
       "id": "goal-f001",
-      "text": "Sustainable startup revenue",
+      "text": "200+ paying users on monthly subscription",
       "category": "work",
       "completed": false,
-      "createdAt": "2024-06-01"
+      "createdAt": "2025-09-25",
+      "context": "12 month goal for Maupka"
     },
     {
       "id": "goal-f002",
       "text": "Extended stay in Japan",
       "category": "travel",
       "completed": false,
-      "createdAt": "2024-01-01"
+      "createdAt": "2024-01-01",
+      "context": "Working Holiday Visa option still available. 2 in lifetime."
     },
     {
       "id": "goal-f003",
-      "text": "Advanced parkour level - teaching others",
-      "category": "parkour",
+      "text": "Japanese fluency - live and work in the language",
+      "category": "travel",
       "completed": false,
-      "createdAt": "2024-01-01"
+      "createdAt": "2024-01-01",
+      "context": "Currently N2-N3 level. Need more output practice."
     },
     {
       "id": "goal-f004",
+      "text": "Sustainable startup revenue - €300k+ ARR",
+      "category": "work",
+      "completed": false,
+      "createdAt": "2025-09-25",
+      "context": "Target: 1,200 families at €25/month"
+    },
+    {
+      "id": "goal-f005",
+      "text": "1% better every day - compounding improvement",
+      "category": "parkour",
+      "completed": false,
+      "createdAt": "2025-06-15",
+      "context": "(1.01)^730 = 1,427x improvement over 2 years"
+    },
+    {
+      "id": "goal-f006",
       "text": "Build something that helps 10,000+ people",
       "category": "work",
       "completed": false,
-      "createdAt": "2024-01-01"
+      "createdAt": "2024-01-01",
+      "context": "Real value for students and teachers in mathematics"
+    },
+    {
+      "id": "goal-f007",
+      "text": "Live life on my own terms - not just easy mode",
+      "category": "travel",
+      "completed": false,
+      "createdAt": "2025-06-15",
+      "context": "There is so much more than just Cork. Control is back with me."
     }
+  ],
+  "values": [
+    "Be kind and helpful to others",
+    "Judge yourself objectively from the 3rd person",
+    "If you're not adventuring and enjoying life, you aren't living your way",
+    "I have a superpower: ability to adapt",
+    "Give yourself twice the time. Chill is better.",
+    "Sleep sometimes, nap"
   ]
 }

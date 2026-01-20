@@ -1,38 +1,39 @@
 {
-  "weekOf": "2025-01-19",
-  "lastUpdated": "2025-01-19T12:00:00Z",
+  "weekOf": "2026-01-20",
+  "lastUpdated": "2026-01-20T18:00:00Z",
   "quadrantStatuses": {
-    "relationships": "thriving",
-    "parkour": "thriving",
-    "work": "needs_attention",
-    "travel": "needs_attention"
+    "relationships": "balanced",
+    "parkour": "needs_attention",
+    "work": "thriving",
+    "travel": "dormant"
   },
-  "summary": "You're in a strong place - relationships and training are thriving, work is productive but could use more focus, and it's been a while since your last adventure.",
+  "summary": "You're deep in the work zone - Maupka is gaining momentum with pilots starting soon. Relationships are solid with Ula and your IGNITE network supporting you. Parkour and Japan are waiting for when the busy hump passes.",
   "valuesAlignment": {
-    "score": 72,
+    "score": 68,
     "livingWell": [
-      "Being present with people you care about",
-      "Physical development through parkour",
-      "Creating and building things"
+      "Innovation and building things - Maupka is real and growing",
+      "Being good to people - strong mentor and advisor relationships",
+      "Learning - constantly iterating and improving"
     ],
     "needsAttention": [
-      "Travel and new experiences",
-      "Work-life balance"
+      "Physical development - training goals set but not yet executed",
+      "Travel and new experiences - Japan dream is deferred",
+      "Balance - you noted you're overdoing it"
     ],
-    "note": "You're doing well overall. The relationships and movement aspects are strong. Consider booking that trip you've been thinking about!"
+    "note": "You wrote: 'I need to get over this busy hump, have that product ready. Then I can relax and start taking my time back.' Trust the process but don't forget to live."
   },
   "actionables": [
     {
       "id": "act-001",
-      "text": "Check your Skyscanner alerts - there might be a good deal waiting",
-      "priority": "medium",
-      "effort": "minimal",
+      "text": "When there's no Claude, there's no work - go train parkour",
+      "priority": "high",
+      "effort": "moderate",
       "impact": "large",
-      "quadrant": "travel"
+      "quadrant": "parkour"
     },
     {
       "id": "act-002",
-      "text": "Schedule a focused work session for IGNITE this week",
+      "text": "Plan out Sales & Marketing timeline (Tom's advice)",
       "priority": "high",
       "effort": "moderate",
       "impact": "large",
@@ -40,13 +41,37 @@
     },
     {
       "id": "act-003",
-      "text": "Reach out to someone you haven't talked to in a while",
-      "priority": "low",
+      "text": "Get product ready for Saturday grind session with Jayden",
+      "priority": "high",
+      "effort": "moderate",
+      "impact": "large",
+      "quadrant": "work"
+    },
+    {
+      "id": "act-004",
+      "text": "Reach out to old contacts - share the tool, thank them",
+      "priority": "medium",
       "effort": "minimal",
       "impact": "medium",
       "quadrant": "relationships"
     }
   ],
-  "celebration": "Major win: Landed the kong precision after weeks of dedicated practice! Your consistency is paying off.",
-  "friendlyNote": "You're doing really well, Sam. Your 20s are about exploration and growth - you're living that. Book that trip when you're ready. The world is waiting."
+  "celebration": "Major win: Life Dashboard is LIVE! You built a personal companion system that reads your notes and visualizes your life. This is exactly the kind of tool you dreamed about.",
+  "friendlyNote": "Sam, you're in the thick of it. The pilot is coming, the funding plan is solid, and you're building something real. Remember your own words: 'A plan without a deadline is just a dream.' But also remember: 'Give yourself twice the time and chill is better.' You've got this.",
+  "currentPhase": {
+    "name": "IGNITE Week 2",
+    "goal": "Company registration + Dashboard 20% + Expand contacts",
+    "endDate": "2026-01-25",
+    "keyMilestone": "Pilot with Jayden on Saturday"
+  },
+  "balanceCheck": {
+    "mood": "energized_but_stretched",
+    "recentJournalSignals": [
+      "excited about progress",
+      "working late",
+      "worried about doing too much",
+      "Claude making things seamless"
+    ],
+    "recommendation": "You're productive but noted you're overdoing it. Quality depletes fast. Leave and only do so much work."
+  }
 }

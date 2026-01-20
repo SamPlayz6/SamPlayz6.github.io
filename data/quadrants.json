@@ -3,36 +3,64 @@
     "name": "Relationships",
     "category": "relationships",
     "color": "#FF6B6B",
-    "status": "thriving",
-    "lastActivity": "2025-01-19",
+    "status": "balanced",
+    "lastActivity": "2026-01-20",
     "activityPulse": true,
     "recentEntries": [
       {
         "id": "rel-001",
-        "date": "2025-01-18",
+        "date": "2026-01-20",
         "category": "relationships",
-        "title": "Deep conversation with Sarah",
-        "content": "Had a meaningful talk about future plans and life direction...",
+        "title": "Lunch with Marco",
+        "content": "Discussed startup approach - important to design pilots that show measurable improvement",
+        "significance": "notable"
+      },
+      {
+        "id": "rel-002",
+        "date": "2026-01-20",
+        "category": "relationships",
+        "title": "Talk with Sam O'Neill (Rowteic)",
+        "content": "Great conversation about long-term platform strategy and pricing models",
+        "significance": "major"
+      },
+      {
+        "id": "rel-003",
+        "date": "2026-01-19",
+        "category": "relationships",
+        "title": "Ula support",
+        "content": "Ula testing the product again - relationship support while building",
         "significance": "notable"
       }
     ],
     "metrics": {
-      "keyPeople": 5,
-      "deepConversations": 3,
+      "keyPeople": 8,
+      "deepConversations": 4,
       "socialEvents": 2
     },
     "people": [
       {
-        "name": "Sarah",
-        "mentionCount": 5,
-        "lastMentioned": "2025-01-18",
+        "name": "Ula",
+        "mentionCount": 12,
+        "lastMentioned": "2026-01-20",
         "connectionQuality": "deep"
       },
       {
-        "name": "Mike",
+        "name": "Marco",
         "mentionCount": 3,
-        "lastMentioned": "2025-01-15",
-        "connectionQuality": "regular"
+        "lastMentioned": "2026-01-19",
+        "connectionQuality": "professional"
+      },
+      {
+        "name": "Damien",
+        "mentionCount": 8,
+        "lastMentioned": "2026-01-19",
+        "connectionQuality": "mentor"
+      },
+      {
+        "name": "Tom Connolly",
+        "mentionCount": 2,
+        "lastMentioned": "2026-01-20",
+        "connectionQuality": "advisor"
       }
     ]
   },
@@ -40,95 +68,153 @@
     "name": "Parkour",
     "category": "parkour",
     "color": "#4ECDC4",
-    "status": "thriving",
-    "lastActivity": "2025-01-17",
-    "activityPulse": true,
+    "status": "needs_attention",
+    "lastActivity": "2026-01-19",
+    "activityPulse": false,
     "recentEntries": [
       {
         "id": "pk-001",
-        "date": "2025-01-17",
+        "date": "2026-01-19",
         "category": "parkour",
-        "title": "Landed new kong vault variation",
-        "content": "Finally nailed the kong precision after weeks of practice!",
-        "significance": "major"
+        "title": "Training goals set",
+        "content": "When there is no Claude, there is no work. Go live your life! Vaults, handsprings, helicopteros",
+        "significance": "notable"
       }
     ],
     "metrics": {
-      "trainingSessions": 8,
-      "newSkillsLanded": 2,
-      "contentCreated": 3
+      "trainingSessions": 2,
+      "newSkillsLanded": 0,
+      "contentCreated": 0
     },
     "skills": [
       {
-        "name": "Kong Precision",
-        "status": "landed",
-        "firstMentioned": "2024-12-01",
-        "lastMentioned": "2025-01-17"
+        "name": "Kong Vaults (5 different)",
+        "status": "practicing",
+        "firstMentioned": "2026-01-19",
+        "lastMentioned": "2026-01-19"
       },
       {
-        "name": "Double Kong",
+        "name": "Front Handsprings on Grass",
+        "status": "hard_goal",
+        "firstMentioned": "2026-01-19",
+        "lastMentioned": "2026-01-19"
+      },
+      {
+        "name": "Helicopteros (both sides)",
+        "status": "hard_goal",
+        "firstMentioned": "2026-01-19",
+        "lastMentioned": "2026-01-19"
+      },
+      {
+        "name": "Dive Rolls (height)",
         "status": "practicing",
-        "firstMentioned": "2025-01-10",
-        "lastMentioned": "2025-01-17"
+        "firstMentioned": "2026-01-19",
+        "lastMentioned": "2026-01-19"
       }
-    ]
+    ],
+    "trainingPhilosophy": "Just stop when your body isn't feeling it. Works for long term progress."
   },
   "work": {
     "name": "Work & Innovation",
     "category": "work",
     "color": "#9B59B6",
-    "status": "needs_attention",
-    "lastActivity": "2025-01-19",
-    "activityPulse": false,
+    "status": "thriving",
+    "lastActivity": "2026-01-20",
+    "activityPulse": true,
     "recentEntries": [
       {
         "id": "wk-001",
-        "date": "2025-01-19",
+        "date": "2026-01-20",
         "category": "work",
-        "title": "Life Dashboard project started",
-        "content": "Beginning work on the personal life tracking system",
+        "title": "Life Dashboard complete!",
+        "content": "Built the personal website backend and dashboard - excited to iterate",
         "significance": "major"
-      }
-    ],
-    "metrics": {
-      "commits": 15,
-      "activeProjects": 2,
-      "hoursThisWeek": 12
-    },
-    "githubStats": {
-      "commits": 15,
-      "repos": ["SamPlayz6.github.io", "IGNITE"],
-      "streak": 5
-    }
-  },
-  "travel": {
-    "name": "Travel & Adventure",
-    "category": "travel",
-    "color": "#F9CA24",
-    "status": "needs_attention",
-    "lastActivity": "2024-12-20",
-    "activityPulse": false,
-    "recentEntries": [
+      },
       {
-        "id": "tv-001",
-        "date": "2024-12-20",
-        "category": "travel",
-        "title": "Christmas trip home",
-        "content": "Visited family for the holidays",
+        "id": "wk-002",
+        "date": "2026-01-20",
+        "category": "work",
+        "title": "Marketing & Sales planning",
+        "content": "Tom's advice: plan events to visit, people to contact, develop sales pitch",
+        "significance": "notable"
+      },
+      {
+        "id": "wk-003",
+        "date": "2026-01-19",
+        "category": "work",
+        "title": "IGNITE Week 2",
+        "content": "Company registration + Dashboard 20% + Expand school contacts",
         "significance": "notable"
       }
     ],
     "metrics": {
-      "daysSinceTrip": 30,
+      "commits": 25,
+      "activeProjects": 3,
+      "hoursThisWeek": 40
+    },
+    "currentFocus": {
+      "company": "Maupka",
+      "description": "AI maths tutoring for Irish secondary students",
+      "stage": "Pilot with 2 schools in January",
+      "program": "IGNITE at UCC"
+    },
+    "githubStats": {
+      "commits": 25,
+      "repos": ["SamPlayz6.github.io", "Maupka"],
+      "streak": 7
+    },
+    "weeklyGoals": [
+      "Company registration submitted",
+      "Teacher dashboard 20%",
+      "Expand school contacts",
+      "Sales & Marketing timeline"
+    ]
+  },
+  "travel": {
+    "name": "Travel & Japan",
+    "category": "travel",
+    "color": "#F9CA24",
+    "status": "dormant",
+    "lastActivity": "2025-09-25",
+    "activityPulse": false,
+    "recentEntries": [
+      {
+        "id": "tv-001",
+        "date": "2025-09-25",
+        "category": "travel",
+        "title": "IGNITE preparation",
+        "content": "Week before IGNITE begins - preparing for the startup journey",
+        "significance": "notable"
+      },
+      {
+        "id": "tv-002",
+        "date": "2025-06-15",
+        "category": "travel",
+        "title": "MEXT disappointment processed",
+        "content": "Didn't get MEXT scholarship but gained clarity. Working Holiday Visa is still an option.",
+        "significance": "major"
+      }
+    ],
+    "metrics": {
+      "daysSinceTrip": 180,
       "tripsThisYear": 0,
       "flightAlerts": 3
     },
     "travelStats": {
-      "daysSinceLastTrip": 30,
+      "daysSinceLastTrip": 180,
       "tripsThisYear": 0,
       "flightAlerts": 3,
-      "japaneseLevel": "N3",
-      "yearsStudying": 3
+      "japaneseLevel": "N2-N3",
+      "yearsStudying": 4
+    },
+    "japanDream": {
+      "status": "deferred_not_abandoned",
+      "options": [
+        "Working Holiday Visa (can apply now, valid for 1 year, get 2 in lifetime)",
+        "Work remote for Japanese startup after Maupka success",
+        "Research Masters pathway"
+      ],
+      "quote": "I want to move, live, see something new. Live in a new frame of life."
     }
   }
 }

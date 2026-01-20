@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 
-type Status = 'thriving' | 'needs_attention' | 'neglected'
+type Status = 'thriving' | 'balanced' | 'needs_attention' | 'dormant' | 'neglected'
 
 interface StatusIndicatorProps {
   status: Status
@@ -14,6 +14,14 @@ const statusConfig = {
   thriving: {
     color: 'bg-status-thriving',
     label: 'Thriving',
+    animation: {
+      scale: [1, 1.1, 1],
+      transition: { repeat: Infinity, duration: 2 },
+    },
+  },
+  balanced: {
+    color: 'bg-emerald-400',
+    label: 'Balanced',
     animation: {},
   },
   needs_attention: {
@@ -22,6 +30,14 @@ const statusConfig = {
     animation: {
       scale: [1, 1.2, 1],
       transition: { repeat: Infinity, duration: 1.5 },
+    },
+  },
+  dormant: {
+    color: 'bg-gray-500',
+    label: 'Dormant',
+    animation: {
+      opacity: [0.5, 0.8, 0.5],
+      transition: { repeat: Infinity, duration: 3 },
     },
   },
   neglected: {
@@ -42,7 +58,7 @@ const sizeConfig = {
 }
 
 export default function StatusIndicator({ status, size = 'md', showLabel = false }: StatusIndicatorProps) {
-  const config = statusConfig[status]
+  const config = statusConfig[status] || statusConfig.balanced
   const sizeClass = sizeConfig[size]
 
   return (

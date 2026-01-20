@@ -2,6 +2,7 @@ import { getDashboardData, formatDate, daysSince } from '@/lib/data'
 import QuickLinks from '@/components/dashboard/QuickLinks'
 import QuadrantCard from '@/components/dashboard/QuadrantCard'
 import RightNowPanel from '@/components/dashboard/RightNowPanel'
+import BalanceIndicator from '@/components/dashboard/BalanceIndicator'
 import type { QuadrantCategory, QuadrantStatus } from '@/types/dashboard'
 
 export const dynamic = 'force-dynamic'
@@ -29,6 +30,13 @@ export default async function DashboardPage() {
     friendlyNote: data.rightNow.friendlyNote,
   }
 
+  // Get balance check data if available
+  const balanceCheck = (data.rightNow as Record<string, unknown>).balanceCheck as {
+    mood?: string
+    recentJournalSignals?: string[]
+    recommendation?: string
+  } | undefined
+
   return (
     <div className="min-h-screen bg-dashboard-bg">
       <QuickLinks />
@@ -42,9 +50,22 @@ export default async function DashboardPage() {
           </p>
         </div>
 
-        {/* Right Now Panel */}
-        <section className="mb-8">
-          <RightNowPanel data={rightNowData} />
+        {/* Balance & Right Now Row */}
+        <section className="mb-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Balance Indicator - smaller */}
+          <div className="lg:col-span-1">
+            <BalanceIndicator
+              score={data.rightNow.valuesAlignment?.score || 0}
+              mood={balanceCheck?.mood}
+              signals={balanceCheck?.recentJournalSignals}
+              recommendation={balanceCheck?.recommendation}
+            />
+          </div>
+
+          {/* Right Now Panel - larger */}
+          <div className="lg:col-span-2">
+            <RightNowPanel data={rightNowData} />
+          </div>
         </section>
 
         {/* Quadrant Cards Grid */}
@@ -53,21 +74,23 @@ export default async function DashboardPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {quadrantOrder.map((category) => {
               const quadrant = data.quadrants[category]
+              // Type assertion for extra properties
+              const extendedQuadrant = quadrant as typeof quadrant & {
+                currentFocus?: { company?: string; description?: string; stage?: string }
+                japanDream?: { status?: string; quote?: string }
+                trainingPhilosophy?: string
+                skills?: Array<{ name: string; status: string }>
+                activityPulse?: boolean
+              }
+
               return (
                 <QuadrantCard
                   key={category}
                   type={category}
                   name={quadrant.name}
                   status={quadrant.status}
-                  lastActivity={
-                    quadrant.lastActivity
-                      ? daysSince(quadrant.lastActivity) === 0
-                        ? 'Today'
-                        : daysSince(quadrant.lastActivity) === 1
-                        ? 'Yesterday'
-                        : `${daysSince(quadrant.lastActivity)} days ago`
-                      : 'Unknown'
-                  }
+                  lastActivity={quadrant.lastActivity || new Date().toISOString()}
+                  activityPulse={extendedQuadrant.activityPulse}
                   recentEntries={quadrant.recentEntries.map((e) => ({
                     id: e.id,
                     date: formatDate(e.date),
@@ -77,7 +100,11 @@ export default async function DashboardPage() {
                     significance: e.significance,
                   }))}
                   people={quadrant.people}
+                  skills={extendedQuadrant.skills}
                   metrics={quadrant.metrics}
+                  currentFocus={extendedQuadrant.currentFocus}
+                  japanDream={extendedQuadrant.japanDream}
+                  trainingPhilosophy={extendedQuadrant.trainingPhilosophy}
                 />
               )
             })}
@@ -94,7 +121,7 @@ export default async function DashboardPage() {
           </div>
           <div className="bg-dashboard-card rounded-lg p-4 text-center">
             <p className="text-2xl font-bold text-quadrant-parkour">
-              {data.quadrants.parkour.metrics.trainingSessions || 0}
+              {data.quadrants.parkour.metrics?.trainingSessions || 0}
             </p>
             <p className="text-xs text-dashboard-text-muted">Training Sessions</p>
           </div>
@@ -111,6 +138,33 @@ export default async function DashboardPage() {
             <p className="text-xs text-dashboard-text-muted">Days Since Trip</p>
           </div>
         </section>
+
+        {/* Current Phase Banner */}
+        {(data.rightNow as Record<string, unknown>).currentPhase && (
+          <section className="mt-8">
+            <div className="bg-gradient-to-r from-quadrant-work/20 to-quadrant-work/5 rounded-xl p-6 border border-quadrant-work/30">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-xs text-quadrant-work uppercase tracking-wider">Current Phase</p>
+                  <h3 className="text-lg font-bold text-white">
+                    {((data.rightNow as Record<string, unknown>).currentPhase as Record<string, string>)?.name}
+                  </h3>
+                  <p className="text-sm text-dashboard-text-muted">
+                    {((data.rightNow as Record<string, unknown>).currentPhase as Record<string, string>)?.goal}
+                  </p>
+                </div>
+                {((data.rightNow as Record<string, unknown>).currentPhase as Record<string, string>)?.keyMilestone && (
+                  <div className="text-right">
+                    <p className="text-xs text-dashboard-text-muted">Key Milestone</p>
+                    <p className="text-sm text-white font-medium">
+                      {((data.rightNow as Record<string, unknown>).currentPhase as Record<string, string>).keyMilestone}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </section>
+        )}
       </main>
     </div>
   )
