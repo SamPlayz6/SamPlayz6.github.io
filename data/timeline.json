@@ -1,0 +1,50 @@
+[
+  {
+    "id": "tl-001",
+    "date": "2025-01-19",
+    "category": "work",
+    "title": "Life Dashboard project started",
+    "content": "Beginning work on the personal life tracking system - a visual story of my 20s",
+    "significance": "major"
+  },
+  {
+    "id": "tl-002",
+    "date": "2025-01-18",
+    "category": "relationships",
+    "title": "Deep conversation with Sarah",
+    "content": "Had a meaningful talk about future plans and life direction. Reminded me what matters.",
+    "significance": "notable"
+  },
+  {
+    "id": "tl-003",
+    "date": "2025-01-17",
+    "category": "parkour",
+    "title": "Landed kong precision!",
+    "content": "Finally nailed the kong precision after weeks of practice. The consistency is paying off.",
+    "significance": "major"
+  },
+  {
+    "id": "tl-004",
+    "date": "2025-01-15",
+    "category": "parkour",
+    "title": "Good training session",
+    "content": "Solid flow state during evening training. Working on double kong progression.",
+    "significance": "minor"
+  },
+  {
+    "id": "tl-005",
+    "date": "2025-01-12",
+    "category": "work",
+    "title": "IGNITE progress",
+    "content": "Made good headway on the startup project. Customer discovery going well.",
+    "significance": "notable"
+  },
+  {
+    "id": "tl-006",
+    "date": "2024-12-20",
+    "category": "travel",
+    "title": "Christmas trip home",
+    "content": "Visited family for the holidays. Good to reconnect.",
+    "significance": "notable"
+  }
+]

@@ -1,0 +1,134 @@
+{
+  "relationships": {
+    "name": "Relationships",
+    "category": "relationships",
+    "color": "#FF6B6B",
+    "status": "thriving",
+    "lastActivity": "2025-01-19",
+    "activityPulse": true,
+    "recentEntries": [
+      {
+        "id": "rel-001",
+        "date": "2025-01-18",
+        "category": "relationships",
+        "title": "Deep conversation with Sarah",
+        "content": "Had a meaningful talk about future plans and life direction...",
+        "significance": "notable"
+      }
+    ],
+    "metrics": {
+      "keyPeople": 5,
+      "deepConversations": 3,
+      "socialEvents": 2
+    },
+    "people": [
+      {
+        "name": "Sarah",
+        "mentionCount": 5,
+        "lastMentioned": "2025-01-18",
+        "connectionQuality": "deep"
+      },
+      {
+        "name": "Mike",
+        "mentionCount": 3,
+        "lastMentioned": "2025-01-15",
+        "connectionQuality": "regular"
+      }
+    ]
+  },
+  "parkour": {
+    "name": "Parkour",
+    "category": "parkour",
+    "color": "#4ECDC4",
+    "status": "thriving",
+    "lastActivity": "2025-01-17",
+    "activityPulse": true,
+    "recentEntries": [
+      {
+        "id": "pk-001",
+        "date": "2025-01-17",
+        "category": "parkour",
+        "title": "Landed new kong vault variation",
+        "content": "Finally nailed the kong precision after weeks of practice!",
+        "significance": "major"
+      }
+    ],
+    "metrics": {
+      "trainingSessions": 8,
+      "newSkillsLanded": 2,
+      "contentCreated": 3
+    },
+    "skills": [
+      {
+        "name": "Kong Precision",
+        "status": "landed",
+        "firstMentioned": "2024-12-01",
+        "lastMentioned": "2025-01-17"
+      },
+      {
+        "name": "Double Kong",
+        "status": "practicing",
+        "firstMentioned": "2025-01-10",
+        "lastMentioned": "2025-01-17"
+      }
+    ]
+  },
+  "work": {
+    "name": "Work & Innovation",
+    "category": "work",
+    "color": "#9B59B6",
+    "status": "needs_attention",
+    "lastActivity": "2025-01-19",
+    "activityPulse": false,
+    "recentEntries": [
+      {
+        "id": "wk-001",
+        "date": "2025-01-19",
+        "category": "work",
+        "title": "Life Dashboard project started",
+        "content": "Beginning work on the personal life tracking system",
+        "significance": "major"
+      }
+    ],
+    "metrics": {
+      "commits": 15,
+      "activeProjects": 2,
+      "hoursThisWeek": 12
+    },
+    "githubStats": {
+      "commits": 15,
+      "repos": ["SamPlayz6.github.io", "IGNITE"],
+      "streak": 5
+    }
+  },
+  "travel": {
+    "name": "Travel & Adventure",
+    "category": "travel",
+    "color": "#F9CA24",
+    "status": "needs_attention",
+    "lastActivity": "2024-12-20",
+    "activityPulse": false,
+    "recentEntries": [
+      {
+        "id": "tv-001",
+        "date": "2024-12-20",
+        "category": "travel",
+        "title": "Christmas trip home",
+        "content": "Visited family for the holidays",
+        "significance": "notable"
+      }
+    ],
+    "metrics": {
+      "daysSinceTrip": 30,
+      "tripsThisYear": 0,
+      "flightAlerts": 3
+    },
+    "travelStats": {
+      "daysSinceLastTrip": 30,
+      "tripsThisYear": 0,
+      "flightAlerts": 3,
+      "japaneseLevel": "N3",
+      "yearsStudying": 3
+    }
+  }
+}

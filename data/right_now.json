@@ -1,0 +1,52 @@
+{
+  "weekOf": "2025-01-19",
+  "lastUpdated": "2025-01-19T12:00:00Z",
+  "quadrantStatuses": {
+    "relationships": "thriving",
+    "parkour": "thriving",
+    "work": "needs_attention",
+    "travel": "needs_attention"
+  },
+  "summary": "You're in a strong place - relationships and training are thriving, work is productive but could use more focus, and it's been a while since your last adventure.",
+  "valuesAlignment": {
+    "score": 72,
+    "livingWell": [
+      "Being present with people you care about",
+      "Physical development through parkour",
+      "Creating and building things"
+    ],
+    "needsAttention": [
+      "Travel and new experiences",
+      "Work-life balance"
+    ],
+    "note": "You're doing well overall. The relationships and movement aspects are strong. Consider booking that trip you've been thinking about!"
+  },
+  "actionables": [
+    {
+      "id": "act-001",
+      "text": "Check your Skyscanner alerts - there might be a good deal waiting",
+      "priority": "medium",
+      "effort": "minimal",
+      "impact": "large",
+      "quadrant": "travel"
+    },
+    {
+      "id": "act-002",
+      "text": "Schedule a focused work session for IGNITE this week",
+      "priority": "high",
+      "effort": "moderate",
+      "impact": "large",
+      "quadrant": "work"
+    },
+    {
+      "id": "act-003",
+      "text": "Reach out to someone you haven't talked to in a while",
+      "priority": "low",
+      "effort": "minimal",
+      "impact": "medium",
+      "quadrant": "relationships"
+    }
+  ],
+  "celebration": "Major win: Landed the kong precision after weeks of dedicated practice! Your consistency is paying off.",
+  "friendlyNote": "You're doing really well, Sam. Your 20s are about exploration and growth - you're living that. Book that trip when you're ready. The world is waiting."
+}

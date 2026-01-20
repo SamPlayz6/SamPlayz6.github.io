@@ -1,0 +1,66 @@
+{
+  "nearFuture": [
+    {
+      "id": "goal-001",
+      "text": "Complete Life Dashboard MVP",
+      "category": "work",
+      "completed": false,
+      "progress": 25,
+      "createdAt": "2025-01-19"
+    },
+    {
+      "id": "goal-002",
+      "text": "Land double kong consistently",
+      "category": "parkour",
+      "completed": false,
+      "progress": 40,
+      "createdAt": "2025-01-10"
+    },
+    {
+      "id": "goal-003",
+      "text": "Book a trip somewhere new",
+      "category": "travel",
+      "completed": false,
+      "progress": 0,
+      "createdAt": "2025-01-01"
+    },
+    {
+      "id": "goal-004",
+      "text": "Launch IGNITE MVP",
+      "category": "work",
+      "completed": false,
+      "progress": 60,
+      "createdAt": "2024-11-01"
+    }
+  ],
+  "farFuture": [
+    {
+      "id": "goal-f001",
+      "text": "Sustainable startup revenue",
+      "category": "work",
+      "completed": false,
+      "createdAt": "2024-06-01"
+    },
+    {
+      "id": "goal-f002",
+      "text": "Extended stay in Japan",
+      "category": "travel",
+      "completed": false,
+      "createdAt": "2024-01-01"
+    },
+    {
+      "id": "goal-f003",
+      "text": "Advanced parkour level - teaching others",
+      "category": "parkour",
+      "completed": false,
+      "createdAt": "2024-01-01"
+    },
+    {
+      "id": "goal-f004",
+      "text": "Build something that helps 10,000+ people",
+      "category": "work",
+      "completed": false,
+      "createdAt": "2024-01-01"
+    }
+  ]
+}

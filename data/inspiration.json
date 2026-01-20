@@ -1,0 +1,53 @@
+[
+  {
+    "id": "insp-001",
+    "category": "movement",
+    "type": "profile",
+    "title": "Toby Segar",
+    "content": "https://www.instagram.com/tobysegar/",
+    "source": "Instagram",
+    "personName": "Toby Segar",
+    "addedAt": "2025-01-01",
+    "tags": ["parkour", "storror", "flow"]
+  },
+  {
+    "id": "insp-002",
+    "category": "innovation",
+    "type": "quote",
+    "title": "Move fast and break things",
+    "content": "Move fast and break things. Unless you are breaking stuff, you are not moving fast enough.",
+    "source": "Mark Zuckerberg",
+    "addedAt": "2024-12-01",
+    "tags": ["startup", "speed", "iteration"]
+  },
+  {
+    "id": "insp-003",
+    "category": "philosophy",
+    "type": "quote",
+    "title": "The obstacle is the way",
+    "content": "The impediment to action advances action. What stands in the way becomes the way.",
+    "source": "Marcus Aurelius",
+    "addedAt": "2024-11-15",
+    "tags": ["stoicism", "adversity", "growth"]
+  },
+  {
+    "id": "insp-004",
+    "category": "travel",
+    "type": "image",
+    "title": "Tokyo at night",
+    "content": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800",
+    "source": "Unsplash",
+    "addedAt": "2024-10-01",
+    "tags": ["japan", "tokyo", "travel-goals"]
+  },
+  {
+    "id": "insp-005",
+    "category": "movement",
+    "type": "video",
+    "title": "Storror - Roof Culture Asia",
+    "content": "https://www.youtube.com/watch?v=1l5zDC1S5D0",
+    "source": "YouTube",
+    "addedAt": "2024-09-01",
+    "tags": ["parkour", "storror", "documentary"]
+  }
+]
