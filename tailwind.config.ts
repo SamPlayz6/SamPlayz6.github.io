@@ -31,6 +31,7 @@ const config: Config = {
           section: {
             light: '#ffffff',
             dark: '#252525',
+            alt: '#f0f0f0',
           },
         },
         // Dashboard quadrant colors
@@ -58,8 +59,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        kalam: ['Kalam', 'cursive', 'sans-serif'],
-        handlee: ['Handlee', 'cursive'],
+        kalam: ['var(--font-kalam)', 'cursive', 'sans-serif'],
+        handlee: ['var(--font-handlee)', 'cursive'],
       },
       animation: {
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',

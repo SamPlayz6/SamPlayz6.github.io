@@ -10,6 +10,8 @@ html {
 
 /* Base transitions for dark mode */
 body {
+  font-size: 18px;
+  line-height: 1.6;
   @apply transition-colors duration-300;
 }
 

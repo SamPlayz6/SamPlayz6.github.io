@@ -10,7 +10,7 @@ export default function IntroSection() {
             alt="Sam Dunning"
             width={200}
             height={200}
-            className="rounded-full object-cover mb-[-1.5rem]"
+            className="w-[200px] h-[200px] rounded-full object-cover mb-[-1.5rem]"
             priority
           />
           <h1 className="text-4xl font-bold mb-[-1rem] text-portfolio-text-light dark:text-portfolio-text-dark">

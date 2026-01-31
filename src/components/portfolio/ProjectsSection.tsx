@@ -24,7 +24,7 @@ const projects: Project[] = [
 
 export default function ProjectsSection() {
   return (
-    <section id="projects" className="bg-portfolio-section-dark dark:bg-portfolio-bg-dark pt-[60px] pb-8 transition-colors duration-300">
+    <section id="projects" className="bg-portfolio-section-alt dark:bg-portfolio-bg-dark pt-[60px] pb-8 transition-colors duration-300">
       <div className="max-w-[1200px] mx-auto px-4 pt-8">
         <h2 className="text-portfolio-text-light dark:text-portfolio-text-dark pb-2 border-b-2 border-portfolio-nav-light dark:border-gray-700 mb-6">
           GitHub Projects
