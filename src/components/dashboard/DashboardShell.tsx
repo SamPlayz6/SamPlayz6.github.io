@@ -2,14 +2,16 @@
 
 import { useState } from 'react'
 import ManualEntryModal, { ManualEntryFAB } from './ManualEntryModal'
+import { ToastProvider, useToast } from './Toast'
 import type { QuadrantCategory } from '@/types/dashboard'
 
 interface DashboardShellProps {
   children: React.ReactNode
 }
 
-export default function DashboardShell({ children }: DashboardShellProps) {
+function DashboardShellInner({ children }: DashboardShellProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const { showToast } = useToast()
 
   const handleSubmit = async (entry: {
     content: string
@@ -30,11 +32,9 @@ export default function DashboardShell({ children }: DashboardShellProps) {
         throw new Error('Failed to save entry')
       }
 
-      // Optionally show a success toast/notification here
-      console.log('Entry saved successfully')
-    } catch (error) {
-      console.error('Error saving entry:', error)
-      // Optionally show an error toast/notification here
+      showToast('Moment logged successfully!', 'success')
+    } catch {
+      showToast('Failed to save entry. Please try again.', 'error')
     }
   }
 
@@ -48,5 +48,13 @@ export default function DashboardShell({ children }: DashboardShellProps) {
         onSubmit={handleSubmit}
       />
     </>
+  )
+}
+
+export default function DashboardShell({ children }: DashboardShellProps) {
+  return (
+    <ToastProvider>
+      <DashboardShellInner>{children}</DashboardShellInner>
+    </ToastProvider>
   )
 }

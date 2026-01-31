@@ -10,12 +10,15 @@ import type {
   DashboardData,
 } from '@/types/dashboard'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type AnyRecord = any
+
 export async function getQuadrants(): Promise<Record<QuadrantCategory, Quadrant>> {
   const rows = await prisma.quadrant.findMany()
 
   const result = {} as Record<QuadrantCategory, Quadrant>
 
-  for (const row of rows) {
+  for (const row of rows as AnyRecord[]) {
     const category = row.category as QuadrantCategory
     const extra = (row.extraData as Record<string, unknown>) || {}
 
@@ -82,7 +85,7 @@ export async function getTimeline(): Promise<TimelineEntry[]> {
     orderBy: { date: 'desc' },
   })
 
-  return entries.map((e) => ({
+  return entries.map((e: AnyRecord) => ({
     id: e.id,
     date: e.date,
     category: e.category as QuadrantCategory,
@@ -105,8 +108,8 @@ export async function getGoals(): Promise<Goals> {
 
   return {
     nearFuture: goals
-      .filter((g) => g.timeframe === 'near')
-      .map((g) => ({
+      .filter((g: AnyRecord) => g.timeframe === 'near')
+      .map((g: AnyRecord) => ({
         id: g.id,
         text: g.text,
         category: (g.category as QuadrantCategory) || undefined,
@@ -116,8 +119,8 @@ export async function getGoals(): Promise<Goals> {
         completedAt: g.completedAt?.toISOString().split('T')[0],
       })),
     farFuture: goals
-      .filter((g) => g.timeframe === 'far')
-      .map((g) => ({
+      .filter((g: AnyRecord) => g.timeframe === 'far')
+      .map((g: AnyRecord) => ({
         id: g.id,
         text: g.text,
         category: (g.category as QuadrantCategory) || undefined,
@@ -125,7 +128,7 @@ export async function getGoals(): Promise<Goals> {
         createdAt: g.createdAt.toISOString().split('T')[0],
         completedAt: g.completedAt?.toISOString().split('T')[0],
       })),
-    values: values.map((v) => v.text),
+    values: values.map((v: AnyRecord) => v.text),
   } as Goals
 }
 
@@ -134,7 +137,7 @@ export async function getInspiration(): Promise<InspirationItem[]> {
     orderBy: { createdAt: 'desc' },
   })
 
-  return items.map((i) => ({
+  return items.map((i: AnyRecord) => ({
     id: i.id,
     category: i.category as InspirationItem['category'],
     type: i.type as InspirationItem['type'],

@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const navLinks = [
   { href: '/dashboard', label: 'Overview', icon: 'home' },
@@ -74,6 +74,7 @@ export default function QuickLinks() {
   const router = useRouter()
   const [isProcessing, setIsProcessing] = useState(false)
   const [processMessage, setProcessMessage] = useState<string | null>(null)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const handleLogout = async () => {
     await fetch('/api/auth/logout', { method: 'POST' })
@@ -97,7 +98,7 @@ export default function QuickLinks() {
         setProcessMessage(data.error || 'Failed to refresh data')
         setTimeout(() => setProcessMessage(null), 5000)
       }
-    } catch (error) {
+    } catch {
       setProcessMessage('Failed to connect to processing server')
       setTimeout(() => setProcessMessage(null), 5000)
     } finally {
@@ -116,8 +117,8 @@ export default function QuickLinks() {
             </span>
           </Link>
 
-          {/* Navigation Links */}
-          <div className="flex items-center gap-1">
+          {/* Desktop Navigation Links */}
+          <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => {
               const isActive = pathname === link.href
               return (
@@ -131,7 +132,7 @@ export default function QuickLinks() {
                   }`}
                 >
                   {icons[link.icon]}
-                  <span className="hidden sm:inline">{link.label}</span>
+                  <span className="hidden lg:inline">{link.label}</span>
                   {isActive && (
                     <motion.div
                       layoutId="activeTab"
@@ -144,9 +145,8 @@ export default function QuickLinks() {
             })}
           </div>
 
-          {/* External Links + Actions */}
-          <div className="flex items-center gap-2">
-            {/* Refresh Button */}
+          {/* Desktop External Links + Actions */}
+          <div className="hidden md:flex items-center gap-2">
             <button
               onClick={handleRefresh}
               disabled={isProcessing}
@@ -170,7 +170,7 @@ export default function QuickLinks() {
                   d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
                 />
               </svg>
-              <span className="hidden sm:inline">
+              <span className="hidden lg:inline">
                 {isProcessing ? 'Processing...' : 'Refresh'}
               </span>
             </button>
@@ -198,24 +198,130 @@ export default function QuickLinks() {
               {icons.logout}
             </button>
           </div>
+
+          {/* Mobile Menu Button */}
+          <div className="flex md:hidden items-center gap-2">
+            <button
+              onClick={handleRefresh}
+              disabled={isProcessing}
+              className={`p-2 rounded-lg transition-colors ${
+                isProcessing
+                  ? 'text-quadrant-parkour'
+                  : 'text-dashboard-text-secondary hover:text-white'
+              }`}
+              title="Refresh data"
+            >
+              <svg
+                className={`w-5 h-5 ${isProcessing ? 'animate-spin' : ''}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                />
+              </svg>
+            </button>
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="p-2 text-dashboard-text-secondary hover:text-white transition-colors"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {isMobileMenuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
+          </div>
         </div>
 
         {/* Process Message Toast */}
-        {processMessage && (
+        <AnimatePresence>
+          {processMessage && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 px-4 py-2 rounded-lg text-sm z-50 ${
+                processMessage.includes('refreshed')
+                  ? 'bg-status-thriving/20 text-status-thriving'
+                  : 'bg-status-neglected/20 text-status-neglected'
+              }`}
+            >
+              {processMessage}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 px-4 py-2 rounded-lg text-sm ${
-              processMessage.includes('refreshed')
-                ? 'bg-status-thriving/20 text-status-thriving'
-                : 'bg-status-neglected/20 text-status-neglected'
-            }`}
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden overflow-hidden border-t border-white/5"
           >
-            {processMessage}
+            <div className="px-4 py-3 space-y-1">
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm transition-colors ${
+                      isActive
+                        ? 'bg-white/10 text-white'
+                        : 'text-dashboard-text-secondary hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    {icons[link.icon]}
+                    <span>{link.label}</span>
+                  </Link>
+                )
+              })}
+
+              <div className="border-t border-white/5 pt-3 mt-3">
+                <p className="text-xs text-dashboard-text-muted px-3 mb-2 uppercase tracking-wider">Quick Links</p>
+                <div className="grid grid-cols-2 gap-1">
+                  {externalLinks.map((link) => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-dashboard-text-secondary hover:text-white hover:bg-white/5 transition-colors"
+                    >
+                      {icons[link.icon]}
+                      <span>{link.label}</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              <div className="border-t border-white/5 pt-3 mt-3">
+                <button
+                  onClick={() => {
+                    handleLogout()
+                    setIsMobileMenuOpen(false)
+                  }}
+                  className="flex items-center gap-3 px-3 py-3 rounded-lg text-sm text-status-neglected hover:bg-status-neglected/10 transition-colors w-full"
+                >
+                  {icons.logout}
+                  <span>Logout</span>
+                </button>
+              </div>
+            </div>
           </motion.div>
         )}
-      </div>
+      </AnimatePresence>
     </nav>
   )
 }

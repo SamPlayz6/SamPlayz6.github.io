@@ -47,23 +47,41 @@ export default function InspirationPage() {
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState<InspirationCategory | 'all'>('all')
   const [selectedItem, setSelectedItem] = useState<InspirationItem | null>(null)
+  const [showAddForm, setShowAddForm] = useState(false)
+
+  const fetchInspiration = async () => {
+    try {
+      const res = await fetch('/api/data/inspiration')
+      if (res.ok) {
+        const data = await res.json()
+        setItems(data)
+      }
+    } catch (error) {
+      console.error('Failed to fetch inspiration:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
-    async function fetchInspiration() {
-      try {
-        const res = await fetch('/api/data/inspiration')
-        if (res.ok) {
-          const data = await res.json()
-          setItems(data)
-        }
-      } catch (error) {
-        console.error('Failed to fetch inspiration:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
     fetchInspiration()
   }, [])
+
+  const addItem = async (item: { title: string; content: string; category: InspirationCategory; type: InspirationType; source?: string; tags?: string[] }) => {
+    try {
+      const res = await fetch('/api/data/inspiration', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(item),
+      })
+      if (res.ok) {
+        await fetchInspiration()
+        setShowAddForm(false)
+      }
+    } catch (error) {
+      console.error('Failed to add inspiration:', error)
+    }
+  }
 
   const filteredItems = filter === 'all'
     ? items
@@ -79,13 +97,29 @@ export default function InspirationPage() {
       <QuickLinks />
 
       <main className="max-w-6xl mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">Inspiration</h1>
-          <p className="text-dashboard-text-secondary">
-            Content and people that fuel your fire
-          </p>
+        <div className="flex items-center justify-between mb-8">
+          <div>
+            <h1 className="text-3xl font-bold text-white mb-2">Inspiration</h1>
+            <p className="text-dashboard-text-secondary">
+              Content and people that fuel your fire
+            </p>
+          </div>
+          <button
+            onClick={() => setShowAddForm(!showAddForm)}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-quadrant-parkour to-quadrant-work text-white text-sm font-medium hover:opacity-90 transition-opacity"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+            </svg>
+            <span className="hidden sm:inline">Add</span>
+          </button>
         </div>
+
+        <AnimatePresence>
+          {showAddForm && (
+            <AddInspirationForm onAdd={addItem} onCancel={() => setShowAddForm(false)} />
+          )}
+        </AnimatePresence>
 
         {/* Filters */}
         <div className="flex flex-wrap gap-2 mb-8">
@@ -131,11 +165,7 @@ export default function InspirationPage() {
                   transition={{ delay: index * 0.05 }}
                   className="masonry-item"
                 >
-                  <InspirationCard
-                    item={item}
-                    onClick={() => setSelectedItem(item)}
-                    getYouTubeId={getYouTubeId}
-                  />
+                  <InspirationCard item={item} onClick={() => setSelectedItem(item)} getYouTubeId={getYouTubeId} />
                 </motion.div>
               ))}
             </AnimatePresence>
@@ -168,29 +198,17 @@ export default function InspirationPage() {
             >
               {selectedItem.type === 'video' && getYouTubeId(selectedItem.content) && (
                 <div className="aspect-video mb-4 rounded-lg overflow-hidden">
-                  <iframe
-                    src={`https://www.youtube.com/embed/${getYouTubeId(selectedItem.content)}`}
-                    className="w-full h-full"
-                    allowFullScreen
-                  />
+                  <iframe src={`https://www.youtube.com/embed/${getYouTubeId(selectedItem.content)}`} className="w-full h-full" allowFullScreen />
                 </div>
               )}
               {selectedItem.type === 'image' && (
-                <img
-                  src={selectedItem.content}
-                  alt={selectedItem.title}
-                  className="w-full rounded-lg mb-4"
-                />
+                <img src={selectedItem.content} alt={selectedItem.title} className="w-full rounded-lg mb-4" />
               )}
               {selectedItem.type === 'quote' && (
                 <div className={`${categoryColors[selectedItem.category].bg} rounded-lg p-6 mb-4`}>
-                  <p className="text-xl text-white italic leading-relaxed">
-                    &ldquo;{selectedItem.content}&rdquo;
-                  </p>
+                  <p className="text-xl text-white italic leading-relaxed">&ldquo;{selectedItem.content}&rdquo;</p>
                   {selectedItem.source && (
-                    <p className={`mt-4 ${categoryColors[selectedItem.category].text}`}>
-                      - {selectedItem.source}
-                    </p>
+                    <p className={`mt-4 ${categoryColors[selectedItem.category].text}`}>- {selectedItem.source}</p>
                   )}
                 </div>
               )}
@@ -200,34 +218,24 @@ export default function InspirationPage() {
                   {selectedItem.category}
                 </span>
                 {selectedItem.source && selectedItem.type !== 'quote' && (
-                  <span className="text-sm text-dashboard-text-muted">
-                    via {selectedItem.source}
-                  </span>
+                  <span className="text-sm text-dashboard-text-muted">via {selectedItem.source}</span>
                 )}
               </div>
               {selectedItem.tags && selectedItem.tags.length > 0 && (
                 <div className="flex flex-wrap gap-2 mb-4">
                   {selectedItem.tags.map((tag) => (
-                    <span key={tag} className="px-2 py-1 bg-white/5 rounded text-xs text-dashboard-text-muted">
-                      #{tag}
-                    </span>
+                    <span key={tag} className="px-2 py-1 bg-white/5 rounded text-xs text-dashboard-text-muted">#{tag}</span>
                   ))}
                 </div>
               )}
               {(selectedItem.type === 'profile' || selectedItem.type === 'article' || selectedItem.type === 'video') && (
-                <a
-                  href={selectedItem.content}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full py-3 bg-gradient-to-r from-quadrant-parkour to-quadrant-work rounded-lg text-white text-center hover:opacity-90 transition-opacity"
-                >
+                <a href={selectedItem.content} target="_blank" rel="noopener noreferrer"
+                  className="block w-full py-3 bg-gradient-to-r from-quadrant-parkour to-quadrant-work rounded-lg text-white text-center hover:opacity-90 transition-opacity">
                   Open Link
                 </a>
               )}
-              <button
-                onClick={() => setSelectedItem(null)}
-                className="mt-4 w-full py-2 bg-white/10 rounded-lg text-white hover:bg-white/20 transition-colors"
-              >
+              <button onClick={() => setSelectedItem(null)}
+                className="mt-4 w-full py-2 bg-white/10 rounded-lg text-white hover:bg-white/20 transition-colors">
                 Close
               </button>
             </motion.div>
@@ -238,31 +246,113 @@ export default function InspirationPage() {
   )
 }
 
-function InspirationCard({
-  item,
-  onClick,
-  getYouTubeId,
+function AddInspirationForm({
+  onAdd,
+  onCancel,
 }: {
-  item: InspirationItem
-  onClick: () => void
-  getYouTubeId: (url: string) => string | null
+  onAdd: (item: { title: string; content: string; category: InspirationCategory; type: InspirationType; source?: string; tags?: string[] }) => Promise<void>
+  onCancel: () => void
 }) {
-  const colors = categoryColors[item.category]
+  const [title, setTitle] = useState('')
+  const [content, setContent] = useState('')
+  const [category, setCategory] = useState<InspirationCategory>('movement')
+  const [type, setType] = useState<InspirationType>('quote')
+  const [source, setSource] = useState('')
+  const [tagsStr, setTagsStr] = useState('')
+  const [submitting, setSubmitting] = useState(false)
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!title.trim() || !content.trim()) return
+    setSubmitting(true)
+    const tags = tagsStr.split(',').map((t) => t.trim()).filter(Boolean)
+    await onAdd({
+      title: title.trim(),
+      content: content.trim(),
+      category,
+      type,
+      source: source.trim() || undefined,
+      tags: tags.length > 0 ? tags : undefined,
+    })
+    setSubmitting(false)
+  }
 
   return (
-    <motion.div
-      whileHover={{ scale: 1.02 }}
-      onClick={onClick}
-      className="bg-dashboard-card rounded-xl overflow-hidden cursor-pointer group"
+    <motion.form
+      initial={{ opacity: 0, height: 0 }}
+      animate={{ opacity: 1, height: 'auto' }}
+      exit={{ opacity: 0, height: 0 }}
+      onSubmit={handleSubmit}
+      className="bg-dashboard-card rounded-xl p-5 mb-8 space-y-4 border border-white/5"
     >
-      {/* Image/Video thumbnail */}
+      <h3 className="text-lg font-bold text-white">Add Inspiration</h3>
+      <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title"
+        className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white placeholder-dashboard-text-muted focus:outline-none focus:border-quadrant-parkour transition-colors text-sm" autoFocus />
+      <div>
+        <label className="block text-xs text-dashboard-text-muted mb-1">Type</label>
+        <div className="flex flex-wrap gap-2">
+          {(['quote', 'video', 'article', 'image', 'profile'] as InspirationType[]).map((t) => (
+            <button key={t} type="button" onClick={() => setType(t)}
+              className={`px-3 py-1 rounded-full text-xs capitalize transition-colors flex items-center gap-1 ${
+                type === t ? 'bg-white/20 text-white' : 'bg-white/5 text-dashboard-text-secondary hover:bg-white/10'
+              }`}>
+              {typeIcons[t]}
+              {t}
+            </button>
+          ))}
+        </div>
+      </div>
+      <textarea value={content} onChange={(e) => setContent(e.target.value)}
+        placeholder={type === 'quote' ? 'The quote text...' : 'URL (e.g. https://...)'}
+        rows={type === 'quote' ? 3 : 1}
+        className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white placeholder-dashboard-text-muted focus:outline-none focus:border-quadrant-parkour transition-colors text-sm resize-none" />
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <label className="block text-xs text-dashboard-text-muted mb-1">Category</label>
+          <div className="flex flex-wrap gap-1.5">
+            {(Object.keys(categoryColors) as InspirationCategory[]).map((cat) => (
+              <button key={cat} type="button" onClick={() => setCategory(cat)}
+                className={`px-2.5 py-1 rounded-full text-xs transition-colors capitalize ${
+                  category === cat ? `${categoryColors[cat].bg} ${categoryColors[cat].text}` : 'bg-white/5 text-dashboard-text-secondary hover:bg-white/10'
+                }`}>
+                {cat}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="space-y-2">
+          <div>
+            <label className="block text-xs text-dashboard-text-muted mb-1">Source</label>
+            <input type="text" value={source} onChange={(e) => setSource(e.target.value)} placeholder="Who/where from?"
+              className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-white text-sm placeholder-dashboard-text-muted focus:outline-none focus:border-quadrant-parkour transition-colors" />
+          </div>
+          <div>
+            <label className="block text-xs text-dashboard-text-muted mb-1">Tags (comma-separated)</label>
+            <input type="text" value={tagsStr} onChange={(e) => setTagsStr(e.target.value)} placeholder="parkour, motivation"
+              className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-white text-sm placeholder-dashboard-text-muted focus:outline-none focus:border-quadrant-parkour transition-colors" />
+          </div>
+        </div>
+      </div>
+      <div className="flex gap-2 pt-2">
+        <button type="button" onClick={onCancel} className="flex-1 py-2 bg-white/10 rounded-lg text-sm text-white hover:bg-white/20 transition-colors">Cancel</button>
+        <button type="submit" disabled={!title.trim() || !content.trim() || submitting}
+          className="flex-1 py-2 bg-gradient-to-r from-quadrant-parkour to-quadrant-work rounded-lg text-sm text-white font-medium disabled:opacity-50 transition-opacity">
+          {submitting ? 'Adding...' : 'Add Inspiration'}
+        </button>
+      </div>
+    </motion.form>
+  )
+}
+
+function InspirationCard({ item, onClick, getYouTubeId }: {
+  item: InspirationItem; onClick: () => void; getYouTubeId: (url: string) => string | null
+}) {
+  const colors = categoryColors[item.category]
+  return (
+    <motion.div whileHover={{ scale: 1.02 }} onClick={onClick} className="bg-dashboard-card rounded-xl overflow-hidden cursor-pointer group">
       {item.type === 'image' && (
         <div className="relative">
-          <img
-            src={item.content}
-            alt={item.title}
-            className="w-full object-cover"
-          />
+          <img src={item.content} alt={item.title} className="w-full object-cover" />
           <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
             <span className="text-white text-sm">View</span>
           </div>
@@ -270,37 +360,23 @@ function InspirationCard({
       )}
       {item.type === 'video' && getYouTubeId(item.content) && (
         <div className="relative aspect-video">
-          <img
-            src={`https://img.youtube.com/vi/${getYouTubeId(item.content)}/mqdefault.jpg`}
-            alt={item.title}
-            className="w-full h-full object-cover"
-          />
+          <img src={`https://img.youtube.com/vi/${getYouTubeId(item.content)}/mqdefault.jpg`} alt={item.title} className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-            <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
-              {typeIcons.video}
-            </div>
+            <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">{typeIcons.video}</div>
           </div>
         </div>
       )}
-
-      {/* Content */}
       <div className="p-4">
         {item.type === 'quote' && (
-          <p className="text-white text-sm italic mb-2 line-clamp-3">
-            &ldquo;{item.content}&rdquo;
-          </p>
+          <p className="text-white text-sm italic mb-2 line-clamp-3">&ldquo;{item.content}&rdquo;</p>
         )}
         <div className="flex items-center gap-2 mb-2">
           <span className={colors.text}>{typeIcons[item.type]}</span>
           <span className={`text-xs ${colors.text} capitalize`}>{item.category}</span>
         </div>
         <h3 className="text-white font-medium text-sm line-clamp-2">{item.title}</h3>
-        {item.personName && (
-          <p className="text-dashboard-text-muted text-xs mt-1">{item.personName}</p>
-        )}
-        {item.source && item.type !== 'quote' && (
-          <p className="text-dashboard-text-muted text-xs mt-1">via {item.source}</p>
-        )}
+        {item.personName && <p className="text-dashboard-text-muted text-xs mt-1">{item.personName}</p>}
+        {item.source && item.type !== 'quote' && <p className="text-dashboard-text-muted text-xs mt-1">via {item.source}</p>}
       </div>
     </motion.div>
   )
