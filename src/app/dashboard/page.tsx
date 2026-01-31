@@ -5,8 +5,6 @@ import RightNowPanel from '@/components/dashboard/RightNowPanel'
 import BalanceIndicator from '@/components/dashboard/BalanceIndicator'
 import type { QuadrantCategory, QuadrantStatus } from '@/types/dashboard'
 
-export const dynamic = 'force-dynamic'
-
 export default async function DashboardPage() {
   const data = await getDashboardData()
 
@@ -31,10 +29,18 @@ export default async function DashboardPage() {
   }
 
   // Get balance check data if available
-  const balanceCheck = (data.rightNow as Record<string, unknown>).balanceCheck as {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const rightNowAny = data.rightNow as any
+  const balanceCheck = rightNowAny.balanceCheck as {
     mood?: string
     recentJournalSignals?: string[]
     recommendation?: string
+  } | undefined
+
+  const currentPhase = rightNowAny.currentPhase as {
+    name?: string
+    goal?: string
+    keyMilestone?: string
   } | undefined
 
   return (
@@ -140,24 +146,24 @@ export default async function DashboardPage() {
         </section>
 
         {/* Current Phase Banner */}
-        {(data.rightNow as Record<string, unknown>).currentPhase && (
+        {currentPhase && (
           <section className="mt-8">
             <div className="bg-gradient-to-r from-quadrant-work/20 to-quadrant-work/5 rounded-xl p-6 border border-quadrant-work/30">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-xs text-quadrant-work uppercase tracking-wider">Current Phase</p>
                   <h3 className="text-lg font-bold text-white">
-                    {((data.rightNow as Record<string, unknown>).currentPhase as Record<string, string>)?.name}
+                    {currentPhase.name}
                   </h3>
                   <p className="text-sm text-dashboard-text-muted">
-                    {((data.rightNow as Record<string, unknown>).currentPhase as Record<string, string>)?.goal}
+                    {currentPhase.goal}
                   </p>
                 </div>
-                {((data.rightNow as Record<string, unknown>).currentPhase as Record<string, string>)?.keyMilestone && (
+                {currentPhase.keyMilestone && (
                   <div className="text-right">
                     <p className="text-xs text-dashboard-text-muted">Key Milestone</p>
                     <p className="text-sm text-white font-medium">
-                      {((data.rightNow as Record<string, unknown>).currentPhase as Record<string, string>).keyMilestone}
+                      {currentPhase.keyMilestone}
                     </p>
                   </div>
                 )}
