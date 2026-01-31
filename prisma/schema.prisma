@@ -1,0 +1,124 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Quadrant {
+  id               String   @id @default(cuid())
+  category         String   @unique // 'relationships' | 'parkour' | 'work' | 'travel'
+  name             String
+  color            String
+  status           String   // 'thriving' | 'needs_attention' | 'neglected' | 'balanced' | 'dormant'
+  lastActivity     String
+  activityPulse    Boolean  @default(false)
+  recentEntries    Json     @default("[]") // TimelineEntry[]
+  metrics          Json     @default("{}") // Record<string, string | number>
+  people           Json?    // Person[] - for relationships
+  skills           Json?    // Skill[] - for parkour
+  githubStats      Json?    // { commits, repos, streak } - for work
+  travelStats      Json?    // { daysSinceLastTrip, ... } - for travel
+  extraData        Json?    // Any other quadrant-specific data (currentFocus, japanDream, etc.)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model TimelineEntry {
+  id           String   @id
+  date         String
+  category     String   // QuadrantCategory
+  title        String
+  content      String
+  imageUrl     String?
+  sourceNote   String?
+  significance String   // 'minor' | 'notable' | 'major'
+  createdAt    DateTime @default(now())
+}
+
+model Person {
+  id                String   @id @default(cuid())
+  name              String
+  mentionCount      Int      @default(0)
+  lastMentioned     String
+  connectionQuality String?  // 'deep' | 'regular' | 'casual' | 'professional' | 'mentor' | 'advisor'
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model Skill {
+  id             String   @id @default(cuid())
+  name           String
+  status         String   // 'practicing' | 'landed' | 'mastered' | 'hard_goal'
+  firstMentioned String
+  lastMentioned  String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Goal {
+  id          String   @id
+  text        String
+  category    String?  // QuadrantCategory
+  timeframe   String   // 'near' | 'far'
+  completed   Boolean  @default(false)
+  progress    Int?     // 0-100
+  context     String?
+  deadline    String?
+  createdAt   DateTime @default(now())
+  completedAt DateTime?
+}
+
+model InspirationItem {
+  id         String   @id
+  category   String   // InspirationCategory
+  type       String   // InspirationType
+  title      String
+  content    String   // URL or text
+  source     String?
+  personName String?
+  addedAt    String
+  tags       Json?    // string[]
+  createdAt  DateTime @default(now())
+}
+
+model RightNowSnapshot {
+  id               String   @id @default(cuid())
+  weekOf           String
+  lastUpdated      String
+  quadrantStatuses Json     // Record<QuadrantCategory, QuadrantStatus>
+  summary          String
+  valuesAlignment  Json     // { score, livingWell, needsAttention, note }
+  actionables      Json     // Actionable[]
+  celebration      String
+  friendlyNote     String
+  extraData        Json?    // balanceCheck, currentPhase, etc.
+  createdAt        DateTime @default(now())
+}
+
+model ManualEntry {
+  id        String   @id @default(cuid())
+  content   String
+  category  String   // QuadrantCategory
+  imageUrl  String?
+  link      String?
+  processed Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model ProcessingMetadata {
+  id                     String   @id @default("singleton")
+  lastProcessed          String?
+  lastNoteScanned        String?
+  totalEntriesProcessed  Int      @default(0)
+  version                String   @default("1.0.0")
+  updatedAt              DateTime @updatedAt
+}
+
+model Value {
+  id        String   @id @default(cuid())
+  text      String
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+}

@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import StatusIndicator from './StatusIndicator'
 
-type Status = 'thriving' | 'needs_attention' | 'neglected'
+type Status = 'thriving' | 'needs_attention' | 'neglected' | 'balanced' | 'dormant'
 
 interface Actionable {
   id: string

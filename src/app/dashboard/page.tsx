@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { getDashboardData, formatDate, daysSince } from '@/lib/data'
 import QuickLinks from '@/components/dashboard/QuickLinks'
 import QuadrantCard from '@/components/dashboard/QuadrantCard'

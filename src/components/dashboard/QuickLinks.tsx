@@ -10,6 +10,7 @@ const navLinks = [
   { href: '/dashboard/timeline', label: 'Timeline', icon: 'timeline' },
   { href: '/dashboard/inspiration', label: 'Inspiration', icon: 'spark' },
   { href: '/dashboard/goals', label: 'Goals', icon: 'target' },
+  { href: '/dashboard/instagram', label: 'Import', icon: 'camera' },
 ]
 
 const externalLinks = [

@@ -1,7 +1,7 @@
 // Life Dashboard Type Definitions
 
 export type QuadrantCategory = 'relationships' | 'parkour' | 'work' | 'travel'
-export type QuadrantStatus = 'thriving' | 'needs_attention' | 'neglected'
+export type QuadrantStatus = 'thriving' | 'needs_attention' | 'neglected' | 'balanced' | 'dormant'
 export type Significance = 'minor' | 'notable' | 'major'
 
 // Timeline Entry - individual moments in your life story
@@ -100,6 +100,7 @@ export interface Goal {
 export interface Goals {
   nearFuture: Goal[] // Next 3 months
   farFuture: Goal[]  // 1-2 years
+  values?: string[]  // Core personal values
 }
 
 // Inspiration item types
