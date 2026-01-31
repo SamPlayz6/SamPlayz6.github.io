@@ -1,18 +1,5 @@
 import type { Metadata } from 'next'
-import { Kalam, Handlee } from 'next/font/google'
 import './globals.css'
-
-const kalam = Kalam({
-  weight: ['400', '700'],
-  subsets: ['latin'],
-  variable: '--font-kalam',
-})
-
-const handlee = Handlee({
-  weight: '400',
-  subsets: ['latin'],
-  variable: '--font-handlee',
-})
 
 export const metadata: Metadata = {
   title: 'Sam Dunning - Data Scientist',
@@ -33,7 +20,15 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${kalam.variable} ${handlee.variable}`}>
+    <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Handlee&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body className="font-kalam">{children}</body>
     </html>
   )
