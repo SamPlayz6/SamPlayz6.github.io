@@ -4,7 +4,15 @@ export default function Footer() {
   return (
     <footer className="text-center p-4 bg-portfolio-nav-light dark:bg-portfolio-nav-dark transition-colors duration-300">
       <p className="text-portfolio-text-light dark:text-portfolio-text-dark">
-        &copy; {currentYear} Sam Dunning
+        &copy; {currentYear} Sam Dunning | Founder & CEO of{' '}
+        <a
+          href="https://maupka.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-portfolio-link-light dark:text-portfolio-link-dark hover:underline"
+        >
+          Maupka
+        </a>
       </p>
     </footer>
   )
