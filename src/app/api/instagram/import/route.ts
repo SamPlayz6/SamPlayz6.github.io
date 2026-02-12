@@ -2,6 +2,9 @@ import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { parseInstagramExport } from '@/lib/instagram'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type AnyRecord = any
+
 export async function POST(request: Request) {
   try {
     const body = await request.json()
@@ -27,7 +30,7 @@ export async function POST(request: Request) {
       where: { source: { startsWith: 'Instagram' } },
       select: { content: true },
     })
-    const existingContents = new Set(existingItems.map((i) => i.content))
+    const existingContents = new Set(existingItems.map((i: AnyRecord) => i.content))
 
     const newItems = items.filter((item) => !existingContents.has(item.content))
 

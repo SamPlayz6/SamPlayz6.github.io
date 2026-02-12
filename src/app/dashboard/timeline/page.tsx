@@ -40,23 +40,41 @@ export default function TimelinePage() {
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState<QuadrantCategory | 'all'>('all')
   const [selectedEntry, setSelectedEntry] = useState<TimelineEntry | null>(null)
+  const [showAddForm, setShowAddForm] = useState(false)
+
+  const fetchTimeline = async () => {
+    try {
+      const res = await fetch('/api/data/timeline')
+      if (res.ok) {
+        const data = await res.json()
+        setTimeline(data)
+      }
+    } catch (error) {
+      console.error('Failed to fetch timeline:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
-    async function fetchTimeline() {
-      try {
-        const res = await fetch('/api/data/timeline')
-        if (res.ok) {
-          const data = await res.json()
-          setTimeline(data)
-        }
-      } catch (error) {
-        console.error('Failed to fetch timeline:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
     fetchTimeline()
   }, [])
+
+  const addEntry = async (entry: { title: string; content: string; category: QuadrantCategory; date: string; significance: string }) => {
+    try {
+      const res = await fetch('/api/data/timeline', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(entry),
+      })
+      if (res.ok) {
+        await fetchTimeline()
+        setShowAddForm(false)
+      }
+    } catch (error) {
+      console.error('Failed to add entry:', error)
+    }
+  }
 
   const filteredTimeline = filter === 'all'
     ? timeline
@@ -76,13 +94,29 @@ export default function TimelinePage() {
       <QuickLinks />
 
       <main className="max-w-4xl mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">Your Timeline</h1>
-          <p className="text-dashboard-text-secondary">
-            A visual story of your journey
-          </p>
+        <div className="flex items-center justify-between mb-8">
+          <div>
+            <h1 className="text-3xl font-bold text-white mb-2">Your Timeline</h1>
+            <p className="text-dashboard-text-secondary">
+              A visual story of your journey
+            </p>
+          </div>
+          <button
+            onClick={() => setShowAddForm(!showAddForm)}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-quadrant-parkour to-quadrant-work text-white text-sm font-medium hover:opacity-90 transition-opacity"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+            </svg>
+            <span className="hidden sm:inline">Add Moment</span>
+          </button>
         </div>
+
+        <AnimatePresence>
+          {showAddForm && (
+            <AddTimelineForm onAdd={addEntry} onCancel={() => setShowAddForm(false)} />
+          )}
+        </AnimatePresence>
 
         {/* Filters */}
         <div className="flex flex-wrap gap-2 mb-8">
@@ -119,10 +153,8 @@ export default function TimelinePage() {
           </div>
         ) : (
           <div className="relative">
-            {/* Timeline line */}
             <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-quadrant-relationships via-quadrant-parkour via-quadrant-work to-quadrant-travel" />
 
-            {/* Timeline entries */}
             <AnimatePresence>
               <div className="space-y-6">
                 {filteredTimeline.map((entry, index) => {
@@ -136,14 +168,12 @@ export default function TimelinePage() {
                       transition={{ delay: index * 0.05 }}
                       className="relative pl-16"
                     >
-                      {/* Timeline dot */}
                       <div
                         className={`absolute left-4 w-5 h-5 rounded-full border-4 border-dashboard-bg ${colors.bg.replace('/20', '')} flex items-center justify-center`}
                       >
                         <div className={`w-2 h-2 rounded-full ${colors.bg.replace('/20', '')}`} />
                       </div>
 
-                      {/* Entry card */}
                       <motion.div
                         whileHover={{ scale: 1.02 }}
                         onClick={() => setSelectedEntry(entry)}
@@ -242,5 +272,97 @@ export default function TimelinePage() {
         )}
       </AnimatePresence>
     </div>
+  )
+}
+
+function AddTimelineForm({
+  onAdd,
+  onCancel,
+}: {
+  onAdd: (entry: { title: string; content: string; category: QuadrantCategory; date: string; significance: string }) => Promise<void>
+  onCancel: () => void
+}) {
+  const [title, setTitle] = useState('')
+  const [content, setContent] = useState('')
+  const [category, setCategory] = useState<QuadrantCategory>('work')
+  const [date, setDate] = useState(new Date().toISOString().split('T')[0])
+  const [significance, setSignificance] = useState('notable')
+  const [submitting, setSubmitting] = useState(false)
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!title.trim() || !content.trim()) return
+    setSubmitting(true)
+    await onAdd({ title: title.trim(), content: content.trim(), category, date, significance })
+    setSubmitting(false)
+  }
+
+  return (
+    <motion.form
+      initial={{ opacity: 0, height: 0 }}
+      animate={{ opacity: 1, height: 'auto' }}
+      exit={{ opacity: 0, height: 0 }}
+      onSubmit={handleSubmit}
+      className="bg-dashboard-card rounded-xl p-5 mb-8 space-y-4 border border-white/5"
+    >
+      <h3 className="text-lg font-bold text-white">Add a Moment</h3>
+      <input
+        type="text"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        placeholder="What happened?"
+        className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white placeholder-dashboard-text-muted focus:outline-none focus:border-quadrant-parkour transition-colors text-sm"
+        autoFocus
+      />
+      <textarea
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+        placeholder="Tell the story..."
+        rows={3}
+        className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white placeholder-dashboard-text-muted focus:outline-none focus:border-quadrant-parkour transition-colors text-sm resize-none"
+      />
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <label className="block text-xs text-dashboard-text-muted mb-1">Category</label>
+          <div className="flex flex-wrap gap-1.5">
+            {(['relationships', 'parkour', 'work', 'travel'] as QuadrantCategory[]).map((cat) => (
+              <button key={cat} type="button" onClick={() => setCategory(cat)}
+                className={`px-2.5 py-1 rounded-full text-xs transition-colors capitalize ${
+                  category === cat ? `${categoryColors[cat].bg} ${categoryColors[cat].text}` : 'bg-white/5 text-dashboard-text-secondary hover:bg-white/10'
+                }`}>
+                {cat}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div>
+          <label className="block text-xs text-dashboard-text-muted mb-1">Date</label>
+          <input type="date" value={date} onChange={(e) => setDate(e.target.value)}
+            className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-white text-sm focus:outline-none focus:border-quadrant-parkour transition-colors" />
+        </div>
+      </div>
+      <div>
+        <label className="block text-xs text-dashboard-text-muted mb-1">Significance</label>
+        <div className="flex gap-2">
+          {['minor', 'notable', 'major'].map((sig) => (
+            <button key={sig} type="button" onClick={() => setSignificance(sig)}
+              className={`px-3 py-1 rounded-full text-xs capitalize transition-colors ${
+                significance === sig ? 'bg-white/20 text-white' : 'bg-white/5 text-dashboard-text-secondary hover:bg-white/10'
+              }`}>
+              {sig}
+            </button>
+          ))}
+        </div>
+      </div>
+      <div className="flex gap-2 pt-2">
+        <button type="button" onClick={onCancel} className="flex-1 py-2 bg-white/10 rounded-lg text-sm text-white hover:bg-white/20 transition-colors">
+          Cancel
+        </button>
+        <button type="submit" disabled={!title.trim() || !content.trim() || submitting}
+          className="flex-1 py-2 bg-gradient-to-r from-quadrant-parkour to-quadrant-work rounded-lg text-sm text-white font-medium disabled:opacity-50 transition-opacity">
+          {submitting ? 'Adding...' : 'Add to Timeline'}
+        </button>
+      </div>
+    </motion.form>
   )
 }

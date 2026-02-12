@@ -59,8 +59,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        kalam: ['var(--font-kalam)', 'cursive', 'sans-serif'],
-        handlee: ['var(--font-handlee)', 'cursive'],
+        kalam: ['Kalam', 'cursive', 'sans-serif'],
+        handlee: ['Handlee', 'cursive'],
       },
       animation: {
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',

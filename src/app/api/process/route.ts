@@ -1,9 +1,11 @@
 import { NextResponse } from 'next/server'
-import { Prisma } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 import { getNotesSummary } from '@/lib/obsidian'
 import { getGitHubSummary } from '@/lib/github'
 import { analyzeLifeData, validateAnalysis } from '@/lib/analyzer'
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type AnyRecord = any
 
 const DAYS_TO_LOOK_BACK = 14
 
@@ -40,7 +42,7 @@ export async function POST(request: Request) {
     // Get current quadrants
     const quadrantRows = await prisma.quadrant.findMany()
     const currentQuadrants: Record<string, { name: string; status: string }> = {}
-    for (const q of quadrantRows) {
+    for (const q of quadrantRows as AnyRecord[]) {
       currentQuadrants[q.category] = { name: q.name, status: q.status }
     }
 
@@ -48,7 +50,7 @@ export async function POST(request: Request) {
     const analysis = await analyzeLifeData(
       notesSummary,
       githubSummary,
-      manualEntries.map((e) => ({
+      manualEntries.map((e: AnyRecord) => ({
         category: e.category,
         content: e.content,
         processed: e.processed,
@@ -96,7 +98,7 @@ export async function POST(request: Request) {
     // Update quadrants
     const quadrantUpdates = analysis.quadrant_updates || {}
     for (const [category, updates] of Object.entries(quadrantUpdates)) {
-      const existing = quadrantRows.find((q) => q.category === category)
+      const existing = (quadrantRows as AnyRecord[]).find((q) => q.category === category)
       if (existing) {
         await prisma.quadrant.update({
           where: { category },
@@ -128,7 +130,7 @@ export async function POST(request: Request) {
         actionables: actionables as object[],
         celebration,
         friendlyNote,
-        extraData: Object.keys(extraRightNow).length > 0 ? (extraRightNow as Prisma.InputJsonValue) : Prisma.DbNull,
+        extraData: Object.keys(extraRightNow).length > 0 ? (extraRightNow as object) : null,
       },
     })
 
@@ -176,7 +178,7 @@ export async function POST(request: Request) {
     // Mark manual entries as processed
     if (manualEntries.length > 0) {
       await prisma.manualEntry.updateMany({
-        where: { id: { in: manualEntries.map((e) => e.id) } },
+        where: { id: { in: manualEntries.map((e: AnyRecord) => e.id) } },
         data: { processed: true },
       })
     }
