@@ -38,6 +38,6 @@
   "exclude": [
     "node_modules",
     "backend",
-    "prisma/seed.ts"
+    "prisma"
   ]
 }
