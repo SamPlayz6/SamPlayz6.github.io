@@ -1,4 +1,5 @@
-import { prisma } from '@/lib/prisma'
+import { promises as fs } from 'fs'
+import path from 'path'
 import type {
   Quadrant,
   QuadrantCategory,
@@ -13,7 +14,25 @@ import type {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type AnyRecord = any
 
+const USE_DB = !!process.env.DATABASE_URL
+
+async function readJsonFile(filename: string) {
+  const filePath = path.join(process.cwd(), 'data', filename)
+  const content = await fs.readFile(filePath, 'utf-8')
+  return JSON.parse(content)
+}
+
+async function db() {
+  const { prisma } = await import('@/lib/prisma')
+  return prisma
+}
+
 export async function getQuadrants(): Promise<Record<QuadrantCategory, Quadrant>> {
+  if (!USE_DB) {
+    return await readJsonFile('quadrants.json')
+  }
+
+  const prisma = await db()
   const rows = await prisma.quadrant.findMany()
 
   const result = {} as Record<QuadrantCategory, Quadrant>
@@ -43,6 +62,11 @@ export async function getQuadrants(): Promise<Record<QuadrantCategory, Quadrant>
 }
 
 export async function getRightNow(): Promise<RightNow> {
+  if (!USE_DB) {
+    return await readJsonFile('right_now.json')
+  }
+
+  const prisma = await db()
   const snapshot = await prisma.rightNowSnapshot.findFirst({
     orderBy: { createdAt: 'desc' },
   })
@@ -81,6 +105,11 @@ export async function getRightNow(): Promise<RightNow> {
 }
 
 export async function getTimeline(): Promise<TimelineEntry[]> {
+  if (!USE_DB) {
+    return await readJsonFile('timeline.json')
+  }
+
+  const prisma = await db()
   const entries = await prisma.timelineEntry.findMany({
     orderBy: { date: 'desc' },
   })
@@ -98,6 +127,11 @@ export async function getTimeline(): Promise<TimelineEntry[]> {
 }
 
 export async function getGoals(): Promise<Goals> {
+  if (!USE_DB) {
+    return await readJsonFile('goals.json')
+  }
+
+  const prisma = await db()
   const goals = await prisma.goal.findMany({
     orderBy: { createdAt: 'desc' },
   })
@@ -133,6 +167,11 @@ export async function getGoals(): Promise<Goals> {
 }
 
 export async function getInspiration(): Promise<InspirationItem[]> {
+  if (!USE_DB) {
+    return await readJsonFile('inspiration.json')
+  }
+
+  const prisma = await db()
   const items = await prisma.inspirationItem.findMany({
     orderBy: { createdAt: 'desc' },
   })
@@ -151,6 +190,11 @@ export async function getInspiration(): Promise<InspirationItem[]> {
 }
 
 export async function getMetadata(): Promise<Metadata> {
+  if (!USE_DB) {
+    return await readJsonFile('metadata.json')
+  }
+
+  const prisma = await db()
   const meta = await prisma.processingMetadata.findUnique({
     where: { id: 'singleton' },
   })
