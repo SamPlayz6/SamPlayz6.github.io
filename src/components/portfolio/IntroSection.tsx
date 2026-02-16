@@ -13,10 +13,10 @@ export default function IntroSection() {
             className="w-[200px] h-[200px] rounded-full object-cover mb-4"
             priority
           />
-          <h1 className="text-4xl font-bold mb-[-1rem] text-portfolio-text-light dark:text-portfolio-text-dark">
+          <h1 className="text-4xl font-bold mb-2 text-portfolio-text-light dark:text-portfolio-text-dark">
             Sam Dunning
           </h1>
-          <p className="text-xl mb-[-0.5rem] text-portfolio-link-dark">
+          <p className="text-xl mb-2 text-portfolio-link-dark">
             Founder & CEO of{' '}
             <a
               href="https://maupka.com"
@@ -28,10 +28,10 @@ export default function IntroSection() {
             </a>{' '}
             | Data Scientist
           </p>
-          <p className="mb-[-0.5rem] text-portfolio-text-light dark:text-portfolio-text-dark">
+          <p className="mb-2 text-portfolio-text-light dark:text-portfolio-text-dark">
             Data Science & Analytics - University College Cork
           </p>
-          <p className="mb-[-0.5rem]">
+          <p className="mb-2">
             <a
               href="mailto:samddunning@hotmail.co.uk"
               className="text-portfolio-text-light dark:text-portfolio-text-dark hover:underline"
