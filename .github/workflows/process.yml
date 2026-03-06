@@ -1,0 +1,32 @@
+name: Process Life Dashboard
+
+on:
+  schedule:
+    # Run every Sunday at 10am UTC (11am Irish time)
+    - cron: '0 10 * * 0'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  process:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger dashboard processing
+        run: |
+          response=$(curl -s -w "\n%{http_code}" -X POST \
+            "${{ secrets.DASHBOARD_URL }}/api/process" \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            -H "x-vercel-cron: 1" \
+            -H "Content-Type: application/json")
+
+          http_code=$(echo "$response" | tail -1)
+          body=$(echo "$response" | head -n -1)
+
+          echo "HTTP Status: $http_code"
+          echo "Response: $body"
+
+          if [ "$http_code" != "200" ]; then
+            echo "::error::Processing failed with status $http_code"
+            exit 1
+          fi
+
+          echo "Processing completed successfully!"

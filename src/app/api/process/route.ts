@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { getNotesSummary } from '@/lib/obsidian'
 import { getGitHubSummary } from '@/lib/github'
+import { getCalendarEvents, formatCalendarForPrompt } from '@/lib/calendar'
 import { analyzeLifeData, validateAnalysis } from '@/lib/analyzer'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -29,10 +30,18 @@ export async function POST(request: Request) {
 
   try {
     // Step 1: Gather data
-    const [notesSummary, githubSummary] = await Promise.all([
+    console.log('[process] Step 1: Gathering data...')
+    const [notesSummary, githubSummary, calendarSummary] = await Promise.all([
       getNotesSummary(DAYS_TO_LOOK_BACK),
       getGitHubSummary(),
+      getCalendarEvents(7, 14),
     ])
+
+    const calendarText = calendarSummary
+      ? formatCalendarForPrompt(calendarSummary)
+      : 'No calendar data available.'
+
+    console.log(`[process] Notes: ${notesSummary.notes?.length || 0}, GitHub commits: ${githubSummary.commits}, Calendar: ${calendarSummary ? 'loaded' : 'none'}`)
 
     // Get manual entries
     const manualEntries = await prisma.manualEntry.findMany({
@@ -47,6 +56,7 @@ export async function POST(request: Request) {
     }
 
     // Step 2: Analyze with Claude
+    console.log('[process] Step 2: Calling Claude API...')
     const analysis = await analyzeLifeData(
       notesSummary,
       githubSummary,
@@ -56,12 +66,16 @@ export async function POST(request: Request) {
         processed: e.processed,
       })),
       currentQuadrants,
-      DAYS_TO_LOOK_BACK
+      DAYS_TO_LOOK_BACK,
+      calendarText
     )
 
     if (!analysis) {
-      return NextResponse.json({ success: false, error: 'Analysis failed' }, { status: 500 })
+      console.error('[process] Claude analysis returned null')
+      return NextResponse.json({ success: false, error: 'Analysis failed - check ANTHROPIC_API_KEY and logs' }, { status: 500 })
     }
+
+    console.log('[process] Step 3: Updating database...')
 
     if (!validateAnalysis(analysis)) {
       return NextResponse.json(
@@ -104,8 +118,8 @@ export async function POST(request: Request) {
           where: { category },
           data: {
             status: updates.status,
-            lastActivity: updates.lastActivity,
-            activityPulse: updates.activityPulse,
+            lastActivity: updates.lastActivity || existing.lastActivity,
+            activityPulse: updates.activityPulse ?? existing.activityPulse,
             metrics: (updates.metrics as object) || existing.metrics,
           },
         })
@@ -207,9 +221,10 @@ export async function POST(request: Request) {
       },
     })
   } catch (error) {
-    console.error('Processing error:', error)
+    const err = error as Error
+    console.error('Processing error:', err.message, err.stack)
     return NextResponse.json(
-      { success: false, error: 'Processing failed' },
+      { success: false, error: err.message || 'Processing failed' },
       { status: 500 }
     )
   }

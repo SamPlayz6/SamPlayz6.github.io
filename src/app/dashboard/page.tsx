@@ -55,6 +55,11 @@ export default async function DashboardPage() {
           <h1 className="text-3xl font-bold text-white mb-2">Welcome back, Sam</h1>
           <p className="text-dashboard-text-secondary">
             Here&apos;s what&apos;s happening in your life
+            {data.metadata.lastProcessed && (
+              <span className="text-dashboard-text-muted text-sm ml-2">
+                · Last updated {new Date(data.metadata.lastProcessed).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
+              </span>
+            )}
           </p>
         </div>
 

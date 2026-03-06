@@ -48,7 +48,8 @@ const ANALYSIS_SYSTEM_PROMPT = `You are a supportive life companion AI helping S
 3. Provide supportive feedback (like a wise friend, not a productivity app)
 4. Be concise - Sam doesn't want to be overwhelmed
 5. Bias towards recent content (more relevant)
-6. Remember his philosophy: "Give yourself twice the time. Chill is better."
+6. Use calendar data to understand commitments, busyness, and free time
+7. Remember his philosophy: "Give yourself twice the time. Chill is better."
 
 ## Sam's core values:
 {values}
@@ -74,6 +75,9 @@ const ANALYSIS_USER_PROMPT = `Please analyze the following data from the past {d
 
 ## GitHub Activity:
 {github}
+
+## Calendar (Google Calendar / Notion Calendar):
+{calendar}
 
 ## Manual Entries:
 {manual_entries}
@@ -184,7 +188,8 @@ export function getUserPrompt(
   githubSummary: GitHubSummary,
   manualEntries: ManualEntry[],
   currentQuadrants: Record<string, QuadrantData>,
-  days: number = 14
+  days: number = 14,
+  calendarText: string = 'No calendar data available.'
 ): string {
   let journalText = ''
   let notesText = ''
@@ -241,6 +246,7 @@ Balance mentions: ${mood.balanceSignals || 0}`
     .replace('{journal_entries}', journalText)
     .replace('{notes}', notesText)
     .replace('{github}', githubText)
+    .replace('{calendar}', calendarText)
     .replace('{manual_entries}', manualText)
     .replace('{current_quadrants}', quadrantsText)
     .replace('{mood_analysis}', moodText)

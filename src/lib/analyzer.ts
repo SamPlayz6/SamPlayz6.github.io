@@ -70,7 +70,8 @@ export async function analyzeLifeData(
   githubSummary: Parameters<typeof getUserPrompt>[1],
   manualEntries: Parameters<typeof getUserPrompt>[2],
   currentQuadrants: Parameters<typeof getUserPrompt>[3],
-  days: number = 14
+  days: number = 14,
+  calendarText: string = 'No calendar data available.'
 ): Promise<AnalysisResult | null> {
   const apiKey = process.env.ANTHROPIC_API_KEY
   if (!apiKey) {
@@ -86,7 +87,8 @@ export async function analyzeLifeData(
     githubSummary,
     manualEntries,
     currentQuadrants,
-    days
+    days,
+    calendarText
   )
 
   try {
@@ -113,7 +115,8 @@ export async function analyzeLifeData(
     if (error instanceof SyntaxError) {
       console.error('Error parsing Claude response as JSON:', error)
     } else {
-      console.error('Error calling Claude API:', error)
+      const err = error as Error & { status?: number }
+      console.error('Error calling Claude API:', err.message || err, 'Status:', err.status)
     }
     return null
   }
