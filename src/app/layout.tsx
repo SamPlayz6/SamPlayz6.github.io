@@ -2,14 +2,14 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Sam Dunning - Data Scientist',
-  description: 'Data Scientist & AI Enthusiast. Building tools that help people learn and create.',
+  title: 'Sam Dunning - AI & Full-Stack Developer',
+  description: 'AI and full-stack developer, and First Class Data Science graduate, building AI products end to end.',
   icons: {
     icon: '/images/x-icon.png',
   },
   openGraph: {
-    title: 'Sam Dunning - Data Scientist',
-    description: 'Data Scientist & AI Enthusiast. Building tools that help people learn and create.',
+    title: 'Sam Dunning - AI & Full-Stack Developer',
+    description: 'AI and full-stack developer, and First Class Data Science graduate, building AI products end to end.',
     type: 'website',
   },
 }

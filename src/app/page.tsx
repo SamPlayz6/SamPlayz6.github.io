@@ -3,8 +3,8 @@
 import { useState, useEffect } from 'react'
 import TopBar from '@/components/portfolio/TopBar'
 import IntroSection from '@/components/portfolio/IntroSection'
+import FreelanceSection from '@/components/portfolio/FreelanceSection'
 import ProjectsSection from '@/components/portfolio/ProjectsSection'
-import BlogSection from '@/components/portfolio/BlogSection'
 import Footer from '@/components/portfolio/Footer'
 
 export default function Home() {
@@ -32,8 +32,8 @@ export default function Home() {
       <TopBar isDarkMode={isDarkMode} onToggleDarkMode={toggleDarkMode} />
       <main>
         <IntroSection />
+        <FreelanceSection />
         <ProjectsSection />
-        <BlogSection />
       </main>
       <Footer />
     </div>

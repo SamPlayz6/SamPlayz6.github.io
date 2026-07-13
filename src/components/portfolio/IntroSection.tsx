@@ -17,7 +17,7 @@ export default function IntroSection() {
             Sam Dunning
           </h1>
           <p className="text-xl mb-3 text-portfolio-link-dark">
-            Founder & CEO of{' '}
+            Founder of{' '}
             <a
               href="https://maupka.com"
               target="_blank"
@@ -26,7 +26,7 @@ export default function IntroSection() {
             >
               Maupka
             </a>{' '}
-            | Data Scientist
+            | Full-Stack & AI Developer
           </p>
           <p className="mb-3 text-portfolio-text-light dark:text-portfolio-text-dark">
             Data Science & Analytics - University College Cork
@@ -93,7 +93,7 @@ export default function IntroSection() {
             >
               Maupka
             </a>
-            , an AI-powered platform helping people learn languages through personalised content. My experience spans research at Tyndall Institute, cybersecurity at Kerry Group, and exploring LLMs in reinforcement learning for my final year project. Always excited about using AI and data science to solve meaningful problems and make the world a bit better!
+            , an online maths tutor for the Irish Junior Cycle and Leaving Cert curriculum. Alongside Maupka, I work as a freelance full-stack developer, building AI products for clients end to end. My experience spans research at Tyndall Institute, cybersecurity at Kerry Group, and an LLM reinforcement-learning final year project. Always excited about using AI and software to solve meaningful problems and make the world a bit better!
           </p>
         </div>
       </div>

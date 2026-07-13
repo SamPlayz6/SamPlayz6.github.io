@@ -36,7 +36,7 @@ export default function Footer() {
         >
           {currentYear}
         </span>{' '}
-        Sam Dunning | Founder & CEO of{' '}
+        Sam Dunning | Founder of{' '}
         <a
           href="https://maupka.com"
           target="_blank"

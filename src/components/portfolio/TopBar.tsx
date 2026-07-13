@@ -60,18 +60,18 @@ export default function TopBar({ isDarkMode, onToggleDarkMode }: TopBarProps) {
           CV
         </a>
         <a
+          href="#freelance"
+          className="font-medium text-portfolio-text-light dark:text-portfolio-text-dark hover:text-portfolio-link-light dark:hover:text-portfolio-link-dark transition-colors"
+          onClick={(e) => scrollToSection(e, 'freelance')}
+        >
+          Freelance
+        </a>
+        <a
           href="#projects"
           className="font-medium text-portfolio-text-light dark:text-portfolio-text-dark hover:text-portfolio-link-light dark:hover:text-portfolio-link-dark transition-colors"
           onClick={(e) => scrollToSection(e, 'projects')}
         >
           Projects
-        </a>
-        <a
-          href="#blog"
-          className="font-medium text-portfolio-text-light dark:text-portfolio-text-dark hover:text-portfolio-link-light dark:hover:text-portfolio-link-dark transition-colors"
-          onClick={(e) => scrollToSection(e, 'blog')}
-        >
-          Blogs
         </a>
 
         <div className="flex items-center gap-2">
