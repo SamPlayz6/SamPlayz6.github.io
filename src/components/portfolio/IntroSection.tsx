@@ -19,12 +19,12 @@ export default function IntroSection() {
           <p className="text-xl mb-3 text-portfolio-link-dark">
             Founder of{' '}
             <a
-              href="https://maupka.com"
+              href="https://mathmate.ie"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:underline"
             >
-              Maupka
+              Math Mate
             </a>{' '}
             | Full-Stack & AI Developer
           </p>
@@ -42,8 +42,8 @@ export default function IntroSection() {
 
           <div className="my-4 flex gap-4">
             <a
-              href="https://maupka.com"
-              title="Maupka"
+              href="https://mathmate.ie"
+              title="Math Mate"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -86,14 +86,14 @@ export default function IntroSection() {
           <p className="leading-relaxed max-w-[600px] text-portfolio-text-light dark:text-portfolio-text-dark">
             First Class Data Science graduate from UCC with a passion for machine learning and making a positive impact. I founded{' '}
             <a
-              href="https://maupka.com"
+              href="https://mathmate.ie"
               target="_blank"
               rel="noopener noreferrer"
               className="text-portfolio-link-light dark:text-portfolio-link-dark hover:underline"
             >
-              Maupka
+              Math Mate
             </a>
-            , an online maths tutor for the Irish Junior Cycle and Leaving Cert curriculum. Alongside Maupka, I work as a freelance full-stack developer, building AI products for clients end to end. My experience spans research at Tyndall Institute, cybersecurity at Kerry Group, and an LLM reinforcement-learning final year project. Always excited about using AI and software to solve meaningful problems and make the world a bit better!
+            , an online maths tutor for the Irish Junior Cycle and Leaving Cert curriculum. Alongside Math Mate, I work as a freelance full-stack developer, building AI products for clients end to end. My experience spans research at Tyndall Institute, cybersecurity at Kerry Group, and an LLM reinforcement-learning final year project. Always excited about using AI and software to solve meaningful problems and make the world a bit better!
           </p>
         </div>
       </div>

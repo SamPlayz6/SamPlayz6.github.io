@@ -13,9 +13,9 @@ const work: Work[] = [
     urlLabel: 'Visit site'
   },
   {
-    title: 'Maupka',
+    title: 'Math Mate',
     description: 'An online maths tutor for the Irish Junior Cycle and Leaving Cert curriculum, with an AI Socratic tutoring engine and a teacher dashboard. Built with React, Supabase and Stripe.',
-    url: 'https://maupka.com',
+    url: 'https://mathmate.ie',
     urlLabel: 'Visit site'
   }
 ]

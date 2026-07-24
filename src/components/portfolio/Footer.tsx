@@ -38,12 +38,12 @@ export default function Footer() {
         </span>{' '}
         Sam Dunning | Founder of{' '}
         <a
-          href="https://maupka.com"
+          href="https://mathmate.ie"
           target="_blank"
           rel="noopener noreferrer"
           className="text-portfolio-link-light dark:text-portfolio-link-dark hover:underline"
         >
-          Maupka
+          Math Mate
         </a>
       </p>
     </footer>
