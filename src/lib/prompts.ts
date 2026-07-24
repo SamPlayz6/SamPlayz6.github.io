@@ -35,7 +35,7 @@ const ANALYSIS_SYSTEM_PROMPT = `You are a supportive life companion AI helping S
 
 ## About Sam:
 - 23 years old, Irish, based in Cork
-- Building Maupka - AI maths tutoring for Irish secondary schools
+- Building Math Mate (formerly Maupka, mathmate.ie) - online maths tutoring for Irish secondary schools
 - Currently in UCC's IGNITE incubator program
 - Passionate about parkour, Japanese language, and innovation
 - Dreams of living in Japan (MEXT didn't work out, but Working Holiday Visa is an option)

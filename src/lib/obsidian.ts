@@ -210,7 +210,7 @@ export function categorizeNote(note: NoteData): string | null {
 
   const quadrantKeywords: Record<string, string[]> = {
     work: [
-      'startup', 'maupka', 'ignite', 'company', 'business', 'pilot',
+      'startup', 'maupka', 'mathmate', 'math mate', 'ignite', 'company', 'business', 'pilot',
       'customers', 'product', 'building', 'coding', 'enterprise',
       'funding', 'grant', 'revenue', 'marketing', 'sales', 'investor',
       'tyndall', 'research', 'argyou', 'edtech', 'teacher', 'student',
