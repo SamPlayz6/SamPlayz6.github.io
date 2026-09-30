@@ -1,8 +1,9 @@
 name: Deploy to GitHub Pages
 
-# RETIRED 2026-08-25: sdd.ie now serves the full app from Vercel (project sdd-ie),
-# including the dashboard/API that this Pages build strips out. Auto-deploy on push
-# is disabled to stop the two systems overlapping. Left as manual-only for reference.
+# RETIRED 2026-08-25: sdd.ie now serves the full app from Vercel (project sdd-ie).
+# 2026-10-01: this workflow now publishes a tiny redirect page so the old
+# samplayz6.github.io address forwards to https://sdd.ie instead of 404ing.
+# Manual-only (workflow_dispatch), run it once after changing the redirect.
 on:
   workflow_dispatch:
 
@@ -19,25 +20,26 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-
-      - run: npm ci
-
-      - name: Prepare for static export
+      - name: Generate redirect page
         run: |
-          rm -f src/middleware.ts
-          rm -rf src/app/api
-          sed -i "/export const dynamic/d" src/app/dashboard/page.tsx
-
-      - name: Build
-        run: npm run build
-        env:
-          STATIC_EXPORT: 'true'
+          mkdir -p out
+          cat > out/index.html <<'EOF'
+          <!doctype html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <title>Sam Dunning — moved to sdd.ie</title>
+            <meta name="robots" content="noindex">
+            <link rel="canonical" href="https://sdd.ie/">
+            <meta http-equiv="refresh" content="0; url=https://sdd.ie/">
+            <script>window.location.replace("https://sdd.ie/");</script>
+          </head>
+          <body>
+            <p>This site has moved to <a href="https://sdd.ie/">sdd.ie</a>.</p>
+          </body>
+          </html>
+          EOF
+          cp out/index.html out/404.html
 
       - uses: actions/upload-pages-artifact@v3
         with:
