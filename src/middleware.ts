@@ -20,13 +20,13 @@ export function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
-  // Scheduled processing (GitHub Action / Vercel cron) has no session cookie;
-  // it authenticates with the cron secret instead, which the route re-checks.
+  // Scheduled processing (GitHub Action) has no session cookie; it
+  // authenticates with the cron secret instead. Vercel may strip the
+  // x-vercel-cron header from outside requests, so only the secret is checked.
   const cronSecret = process.env.CRON_SECRET
   if (
     pathname.startsWith('/api/process') &&
     cronSecret &&
-    request.headers.get('x-vercel-cron') === '1' &&
     request.headers.get('authorization') === `Bearer ${cronSecret}`
   ) {
     return NextResponse.next()
