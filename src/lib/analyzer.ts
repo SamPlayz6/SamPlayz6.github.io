@@ -99,12 +99,25 @@ export async function analyzeLifeData(
   try {
     const message = await client.messages.create({
       model: 'claude-haiku-5-5',
-      max_tokens: 3000,
+      // The full analysis JSON runs well past 3000 tokens; a cut-off reply
+      // fails JSON.parse with "Unexpected end of JSON input".
+      max_tokens: 8000,
       system: systemPrompt,
       messages: [{ role: 'user', content: userPrompt }],
     })
 
-    let responseText = message.content[0].type === 'text' ? message.content[0].text : ''
+    if (message.stop_reason === 'max_tokens') {
+      console.error('Claude response hit max_tokens, JSON will be truncated')
+    }
+    const textBlock = message.content.find((block) => block.type === 'text')
+    let responseText = textBlock && textBlock.type === 'text' ? textBlock.text : ''
+
+    // Keep only the JSON object, in case the model adds any prose around it
+    const firstBrace = responseText.indexOf('{')
+    const lastBrace = responseText.lastIndexOf('}')
+    if (firstBrace !== -1 && lastBrace > firstBrace) {
+      responseText = responseText.slice(firstBrace, lastBrace + 1)
+    }
 
     // Strip markdown code blocks if present
     if (responseText.startsWith('```')) {

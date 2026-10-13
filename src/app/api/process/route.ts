@@ -10,6 +10,9 @@ type AnyRecord = any
 
 const DAYS_TO_LOOK_BACK = 14
 
+// The weekly analysis takes 20-40s; Vercel's default function limit is 10s.
+export const maxDuration = 60
+
 /**
  * Authenticate via session cookie (middleware handles this for /api/process)
  * or via cron secret header for scheduled runs.
