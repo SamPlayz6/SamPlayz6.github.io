@@ -23,6 +23,11 @@ interface AnalysisResult {
       activityPulse: boolean
       recentHighlight?: string
       metrics?: Record<string, unknown>
+      people?: Array<{ name: string; mentionCount: number; connectionQuality?: string }>
+      skills?: Array<{ name: string; status: string }>
+      githubStats?: { commits: number; repos: string[]; streak: number }
+      travelStats?: { daysSinceLastTrip?: number; japaneseLevel?: string }
+      [key: string]: unknown
     }
   >
   right_now: {
@@ -93,8 +98,8 @@ export async function analyzeLifeData(
 
   try {
     const message = await client.messages.create({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 4096,
+      model: 'claude-haiku-5-5',
+      max_tokens: 3000,
       system: systemPrompt,
       messages: [{ role: 'user', content: userPrompt }],
     })
